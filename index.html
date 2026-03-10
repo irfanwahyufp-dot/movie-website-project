@@ -3,17 +3,16 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Online Cinema</title>
+<title>XXI Cinema</title>
 
 <style>
 
 body{
 margin:0;
 font-family:Arial;
-background:#0f2027;
-background:linear-gradient(to right,#0f2027,#203a43,#2c5364);
+background:#0d0d0d;
 color:white;
 }
 
@@ -25,17 +24,18 @@ justify-content:space-between;
 align-items:center;
 padding:15px 30px;
 background:black;
+border-bottom:2px solid gold;
 }
 
 .logo{
-font-size:20px;
-color:#ffd700;
+font-size:22px;
+color:gold;
 font-weight:bold;
 }
 
 nav ul{
 display:flex;
-gap:20px;
+gap:25px;
 list-style:none;
 cursor:pointer;
 }
@@ -43,16 +43,14 @@ cursor:pointer;
 /* HERO */
 
 .hero{
-height:300px;
-background:url("https://image.tmdb.org/t/p/original/9BBTo63ANSmhC4e6r62OJFuK2GL.jpg");
-background-size:cover;
-display:flex;
-align-items:center;
-padding-left:40px;
+height:380px;
+overflow:hidden;
 }
 
-.hero h1{
-font-size:40px;
+.hero img{
+width:100%;
+height:100%;
+object-fit:cover;
 }
 
 /* SEARCH */
@@ -64,9 +62,32 @@ margin:20px;
 
 .search input{
 padding:10px;
-width:300px;
+width:320px;
 border-radius:6px;
 border:none;
+}
+
+/* CATEGORY */
+
+.category{
+display:flex;
+gap:10px;
+justify-content:center;
+margin-bottom:20px;
+}
+
+.category button{
+background:#222;
+border:none;
+color:white;
+padding:8px 15px;
+border-radius:20px;
+cursor:pointer;
+}
+
+.category button:hover{
+background:gold;
+color:black;
 }
 
 /* MOVIES */
@@ -80,10 +101,10 @@ padding:30px;
 
 .movie{
 background:#1b1b1b;
-padding:15px;
-border-radius:12px;
-text-align:center;
+padding:12px;
+border-radius:10px;
 transition:0.3s;
+text-align:center;
 }
 
 .movie:hover{
@@ -95,12 +116,12 @@ width:100%;
 border-radius:8px;
 }
 
-button{
-margin-top:6px;
-background:red;
+.movie button{
+width:100%;
+margin-top:5px;
+background:gold;
 border:none;
-padding:8px 12px;
-color:white;
+padding:8px;
 border-radius:6px;
 cursor:pointer;
 }
@@ -124,7 +145,7 @@ background:#111;
 padding:25px;
 border-radius:10px;
 text-align:center;
-max-width:400px;
+max-width:420px;
 }
 
 /* SEATS */
@@ -145,7 +166,7 @@ cursor:pointer;
 }
 
 .seat.selected{
-background:limegreen;
+background:gold;
 }
 
 /* TICKET */
@@ -161,17 +182,17 @@ margin-top:10px;
 
 @media(max-width:600px){
 
-.hero h1{
-font-size:28px;
-}
-
-.search input{
-width:90%;
+.hero{
+height:250px;
 }
 
 nav{
 flex-direction:column;
 gap:10px;
+}
+
+.search input{
+width:90%;
 }
 
 }
@@ -183,7 +204,7 @@ gap:10px;
 
 <nav>
 
-<div class="logo">🎬 Online Cinema</div>
+<div class="logo">🎬 XXI Cinema</div>
 
 <ul>
 
@@ -194,54 +215,61 @@ gap:10px;
 
 </nav>
 
+<!-- HERO SLIDER -->
+
 <div class="hero">
-<h1>Now Showing</h1>
+
+<img id="banner" src="https://image.tmdb.org/t/p/original/9BBTo63ANSmhC4e6r62OJFuK2GL.jpg">
+
 </div>
+
+<!-- SEARCH -->
 
 <div class="search">
 <input type="text" id="search" placeholder="Search movie...">
 </div>
 
-<div class="movies" id="movieList">
+<!-- CATEGORY -->
+
+<div class="category">
+
+<button>All</button>
+<button>Action</button>
+<button>Sci-Fi</button>
+<button>Adventure</button>
+
+</div>
+
+<!-- MOVIES -->
+
+<div class="movies">
 
 <div class="movie">
-
 <img src="https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg">
-
 <h3>Avengers Endgame</h3>
-
+<p>⭐ 8.4</p>
 <button onclick="openBooking('Avengers Endgame')">Buy Ticket</button>
-
 </div>
 
 <div class="movie">
-
 <img src="https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg">
-
 <h3>Spider-Man</h3>
-
+<p>⭐ 8.3</p>
 <button onclick="openBooking('Spider-Man')">Buy Ticket</button>
-
 </div>
 
 <div class="movie">
-
 <img src="https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg">
-
 <h3>The Dark Knight</h3>
-
+<p>⭐ 9.0</p>
 <button onclick="openBooking('The Dark Knight')">Buy Ticket</button>
-
 </div>
 
 <div class="movie">
-
 <img src="https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg">
-
 <h3>Interstellar</h3>
-
+<p>⭐ 8.6</p>
 <button onclick="openBooking('Interstellar')">Buy Ticket</button>
-
 </div>
 
 </div>
@@ -266,9 +294,46 @@ gap:10px;
 
 <br>
 
-<button onclick="checkout()">Checkout</button>
-
+<button onclick="goPayment()">Checkout</button>
 <button onclick="closeBooking()">Close</button>
+
+</div>
+
+</div>
+
+<!-- PAYMENT -->
+
+<div class="popup" id="paymentPopup">
+
+<div class="popup-content">
+
+<h2>Payment</h2>
+
+<p>Total Payment</p>
+
+<h3 id="totalPrice"></h3>
+
+<button onclick="showQR()">Pay with QRIS / E-Wallet</button>
+
+<br><br>
+
+<div id="qrArea" style="display:none">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/QRIS_logo.svg" width="120">
+
+<br><br>
+
+<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=CINEMA-PAYMENT-DEMO">
+
+<p>Scan QR to Pay</p>
+
+<button onclick="finishPayment()">I Already Paid</button>
+
+</div>
+
+<br>
+
+<button onclick="closePayment()">Cancel</button>
 
 </div>
 
@@ -308,6 +373,28 @@ gap:10px;
 
 <script>
 
+/* HERO SLIDER */
+
+let banners=[
+"https://image.tmdb.org/t/p/original/9BBTo63ANSmhC4e6r62OJFuK2GL.jpg",
+"https://image.tmdb.org/t/p/original/5YZbUmjbMa3ClvSW1Wj3D6XGolb.jpg",
+"https://image.tmdb.org/t/p/original/y2Ca1neKke2mGPMaHzlCNDVZqsK.jpg"
+]
+
+let index=0
+
+setInterval(()=>{
+
+index++
+
+if(index>=banners.length) index=0
+
+document.getElementById("banner").src=banners[index]
+
+},4000)
+
+/* BOOKING */
+
 let selectedMovie=""
 let selectedTime=""
 let selectedSeats=[]
@@ -318,24 +405,19 @@ selectedMovie=movie
 selectedSeats=[]
 
 document.getElementById("movieTitle").innerText=movie
-
 document.getElementById("bookingPopup").style.display="flex"
 
 }
 
 function closeBooking(){
-
 document.getElementById("bookingPopup").style.display="none"
-
 }
 
 function setTime(time){
-
 selectedTime=time
-
 }
 
-/* CREATE SEATS */
+/* SEATS */
 
 let seatArea=document.getElementById("seatArea")
 
@@ -344,14 +426,17 @@ for(let i=1;i<=30;i++){
 let seat=document.createElement("div")
 
 seat.className="seat"
-
 seat.innerText=i
 
 seat.onclick=function(){
 
 seat.classList.toggle("selected")
 
+if(selectedSeats.includes(i)){
+selectedSeats=selectedSeats.filter(s=>s!==i)
+}else{
 selectedSeats.push(i)
+}
 
 }
 
@@ -359,20 +444,44 @@ seatArea.appendChild(seat)
 
 }
 
-function checkout(){
+/* PAYMENT */
+
+function goPayment(){
+
+let total=selectedSeats.length*35000
+
+document.getElementById("totalPrice").innerText="Rp "+total
+
+document.getElementById("bookingPopup").style.display="none"
+
+document.getElementById("paymentPopup").style.display="flex"
+
+}
+
+function showQR(){
+
+document.getElementById("qrArea").style.display="block"
+
+}
+
+function closePayment(){
+
+document.getElementById("paymentPopup").style.display="none"
+
+}
+
+function finishPayment(){
 
 let total=selectedSeats.length*35000
 
 let ticket={
-
 movie:selectedMovie,
 time:selectedTime,
 seats:selectedSeats,
 total:total
-
 }
 
-let history=JSON.parse(localStorage.getItem("tickets")) || []
+let history=JSON.parse(localStorage.getItem("tickets"))||[]
 
 history.push(ticket)
 
@@ -383,31 +492,26 @@ document.getElementById("ticketInfo").innerHTML=
 "Movie: "+ticket.movie+"<br>"+
 "Time: "+ticket.time+"<br>"+
 "Seats: "+ticket.seats+"<br>"+
-"Total: Rp "+ticket.total
+"Total: Rp "+ticket.total+"<br>"+
+"Payment: QRIS"
 
-document.getElementById("bookingPopup").style.display="none"
+document.getElementById("paymentPopup").style.display="none"
 
 document.getElementById("ticketPopup").style.display="flex"
 
 }
 
-function closeTicket(){
-
-document.getElementById("ticketPopup").style.display="none"
-
-}
+/* HISTORY */
 
 function showTickets(){
 
-let history=JSON.parse(localStorage.getItem("tickets")) || []
+let history=JSON.parse(localStorage.getItem("tickets"))||[]
 
 let html=""
 
 history.forEach(t=>{
 
-html+=
-
-"<div class='ticket'>"+
+html+="<div class='ticket'>"+
 "Movie: "+t.movie+"<br>"+
 "Time: "+t.time+"<br>"+
 "Seats: "+t.seats+"<br>"+
@@ -428,11 +532,19 @@ document.getElementById("historyPopup").style.display="none"
 
 }
 
+function closeTicket(){
+
+document.getElementById("ticketPopup").style.display="none"
+
+}
+
 function showHome(){
 
 location.reload()
 
 }
+
+/* SEARCH */
 
 document.getElementById("search").addEventListener("keyup",function(){
 
