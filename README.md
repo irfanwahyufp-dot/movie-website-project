@@ -1,22 +1,34 @@
-# 🎬 Movie Website Project
+#  Movie Website Project
 
-## 📌 Deskripsi
+##  Deskripsi
 
-Movie Website Project adalah website sederhana yang menampilkan daftar film yang sedang tayang.
-Pengguna dapat melihat informasi film, menonton trailer, mencari film, dan melakukan simulasi pemesanan tiket bioskop.
+Movie Website Project adalah website simulasi pemesanan tiket bioskop yang terinspirasi dari aplikasi bioskop seperti XXI.
+Pengguna dapat melihat daftar film, mencari film, memilih jadwal tayang, memilih kursi, serta melakukan simulasi pembayaran menggunakan QRIS atau e-wallet.
 
-Project ini dibuat sebagai latihan **Web Development menggunakan HTML, CSS, dan JavaScript**.
+Project ini dibuat sebagai latihan **Web Development** menggunakan **HTML, CSS, dan JavaScript**.
 
 ---
 
-## 🚀 Fitur Website
+##  Fitur Website
 
-* 🎬 Menampilkan daftar film
-* ⭐ Menampilkan rating film
-* 🔎 Fitur pencarian film (Search)
-* 🎞 Menonton trailer film
-* 🎟 Simulasi pemesanan tiket
-* 💺 Pemilihan kursi bioskop sederhana
+*  Menampilkan daftar film
+*  Fitur pencarian film
+*  Menampilkan rating film
+*  Pemilihan jadwal tayang
+*  Pemilihan kursi bioskop
+*  Simulasi pembayaran e-wallet
+*  Pembayaran QR menggunakan QRIS
+*  Menampilkan tiket digital
+*  Riwayat tiket yang pernah dibeli
+*  Tampilan responsive (mobile friendly)
+
+---
+
+##  Demo Website
+
+Website dapat diakses melalui link berikut:
+
+https://irfanwahyufp-dot.github.io/movie-website-project/
 
 ---
 
@@ -26,26 +38,8 @@ Project ini dibuat sebagai latihan **Web Development menggunakan HTML, CSS, dan 
 * CSS
 * JavaScript
 
-Website ini di-deploy menggunakan **GitHub Pages** sehingga bisa diakses secara online.
-
 ---
 
-## 🌐 Demo Website
+##  Author
 
-Website dapat diakses melalui link berikut:
-
-https://irfanwahyufp-dot.github.io/movie-website-project/
-
----
-
-## 📷 Screenshot Website
-
-(Tambahkan screenshot tampilan website di sini nanti)
-
----
-
-## 👨‍💻 Author
-
-Nama: Irfan Wahyu
-Project: Movie Website Project
-Tahun: 2026
+Project ini dibuat sebagai latihan pengembangan website.
