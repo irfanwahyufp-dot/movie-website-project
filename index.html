@@ -7,8 +7,8 @@
 <style>
 
 body{
-font-family:Arial;
 margin:0;
+font-family:Arial;
 background:#0f2027;
 background:linear-gradient(to right,#0f2027,#203a43,#2c5364);
 color:white;
@@ -19,6 +19,7 @@ color:white;
 nav{
 display:flex;
 justify-content:space-between;
+align-items:center;
 padding:20px 60px;
 background:black;
 }
@@ -40,6 +41,22 @@ color:white;
 text-decoration:none;
 }
 
+/* HERO */
+
+.hero{
+height:400px;
+background:url("https://image.tmdb.org/t/p/original/9BBTo63ANSmhC4e6r62OJFuK2GL.jpg");
+background-size:cover;
+background-position:center;
+display:flex;
+align-items:center;
+padding-left:80px;
+}
+
+.hero h1{
+font-size:50px;
+}
+
 /* SEARCH */
 
 .search{
@@ -49,12 +66,12 @@ margin:30px;
 
 .search input{
 padding:10px;
-width:300px;
+width:350px;
 border-radius:6px;
 border:none;
 }
 
-/* MOVIE GRID */
+/* MOVIES */
 
 .movies{
 display:grid;
@@ -103,7 +120,7 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.8);
+background:rgba(0,0,0,0.9);
 justify-content:center;
 align-items:center;
 }
@@ -114,11 +131,13 @@ padding:20px;
 border-radius:10px;
 }
 
+/* SEAT */
+
 .seats{
 display:grid;
-grid-template-columns:repeat(6,40px);
+grid-template-columns:repeat(8,40px);
 gap:10px;
-margin-top:10px;
+margin-top:20px;
 }
 
 .seat{
@@ -148,6 +167,10 @@ background:limegreen;
 
 </nav>
 
+<div class="hero">
+<h1>Now Showing</h1>
+</div>
+
 <div class="search">
 <input type="text" id="search" placeholder="Search movie...">
 </div>
@@ -155,78 +178,97 @@ background:limegreen;
 <div class="movies" id="movieList">
 
 <div class="movie">
+
 <img src="https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg">
+
 <h3>Avengers Endgame</h3>
 <p>⭐ 8.4</p>
+
 <button onclick="openTrailer('https://www.youtube.com/embed/TcMBFSGVi1c')">Trailer</button>
-<button onclick="openBooking()">Pesan Tiket</button>
+
+<button onclick="openBooking('Avengers Endgame')">Buy Ticket</button>
+
 </div>
 
 <div class="movie">
+
 <img src="https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg">
+
 <h3>Spider-Man</h3>
 <p>⭐ 8.3</p>
+
 <button onclick="openTrailer('https://www.youtube.com/embed/JfVOs4VSpmA')">Trailer</button>
-<button onclick="openBooking()">Pesan Tiket</button>
+
+<button onclick="openBooking('Spider-Man')">Buy Ticket</button>
+
 </div>
 
 <div class="movie">
+
 <img src="https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg">
+
 <h3>The Dark Knight</h3>
 <p>⭐ 9.0</p>
+
 <button onclick="openTrailer('https://www.youtube.com/embed/EXeTwQWrcwY')">Trailer</button>
-<button onclick="openBooking()">Pesan Tiket</button>
+
+<button onclick="openBooking('The Dark Knight')">Buy Ticket</button>
+
 </div>
 
 <div class="movie">
+
 <img src="https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg">
+
 <h3>Interstellar</h3>
 <p>⭐ 8.6</p>
+
 <button onclick="openTrailer('https://www.youtube.com/embed/zSWdZVtXT7E')">Trailer</button>
-<button onclick="openBooking()">Pesan Tiket</button>
-</div>
+
+<button onclick="openBooking('Interstellar')">Buy Ticket</button>
 
 </div>
 
-<!-- TRAILER POPUP -->
+</div>
+
+<!-- TRAILER -->
 
 <div class="popup" id="trailerPopup">
+
 <div class="popup-content">
-<iframe id="trailerVideo" width="560" height="315"></iframe>
+
+<iframe id="trailerVideo" width="700" height="400"></iframe>
+
 <br><br>
+
 <button onclick="closeTrailer()">Close</button>
-</div>
+
 </div>
 
-<!-- BOOKING POPUP -->
+</div>
+
+<!-- BOOKING -->
 
 <div class="popup" id="bookingPopup">
 
 <div class="popup-content">
 
-<h2>Select Seat</h2>
+<h2 id="movieTitle"></h2>
 
-<div class="seats">
+<p>Select Showtime</p>
 
-<div class="seat"></div>
-<div class="seat"></div>
-<div class="seat"></div>
-<div class="seat"></div>
-<div class="seat"></div>
-<div class="seat"></div>
+<button onclick="setTime('12:30')">12:30</button>
+<button onclick="setTime('15:00')">15:00</button>
+<button onclick="setTime('18:30')">18:30</button>
+<button onclick="setTime('21:00')">21:00</button>
 
-<div class="seat"></div>
-<div class="seat"></div>
-<div class="seat"></div>
-<div class="seat"></div>
-<div class="seat"></div>
-<div class="seat"></div>
+<h3>Select Seat</h3>
 
-</div>
+<div class="seats" id="seatArea"></div>
 
 <br>
 
-<button onclick="alert('Ticket Booked!')">Confirm Ticket</button>
+<button onclick="checkout()">Checkout</button>
 <button onclick="closeBooking()">Close</button>
 
 </div>
@@ -235,45 +277,81 @@ background:limegreen;
 
 <script>
 
-/* TRAILER */
+let selectedMovie=""
+let selectedTime=""
+let selectedSeats=[]
 
 function openTrailer(link){
 
-document.getElementById("trailerPopup").style.display="flex";
-document.getElementById("trailerVideo").src=link;
+document.getElementById("trailerPopup").style.display="flex"
+document.getElementById("trailerVideo").src=link
 
 }
 
 function closeTrailer(){
 
-document.getElementById("trailerPopup").style.display="none";
-document.getElementById("trailerVideo").src="";
+document.getElementById("trailerPopup").style.display="none"
+document.getElementById("trailerVideo").src=""
 
 }
 
-/* BOOKING */
+function openBooking(movie){
 
-function openBooking(){
+selectedMovie=movie
 
-document.getElementById("bookingPopup").style.display="flex";
+document.getElementById("movieTitle").innerText=movie
+
+document.getElementById("bookingPopup").style.display="flex"
 
 }
 
 function closeBooking(){
 
-document.getElementById("bookingPopup").style.display="none";
+document.getElementById("bookingPopup").style.display="none"
 
 }
 
-/* SEAT SELECT */
+function setTime(time){
 
-document.querySelectorAll(".seat").forEach(seat=>{
-seat.onclick=()=>{
+selectedTime=time
+alert("Showtime selected: "+time)
+
+}
+
+/* CREATE SEATS */
+
+let seatArea=document.getElementById("seatArea")
+
+for(let i=1;i<=32;i++){
+
+let seat=document.createElement("div")
+
+seat.className="seat"
+
+seat.innerText=i
+
+seat.onclick=function(){
+
 seat.classList.toggle("selected")
-}
-})
 
-/* SEARCH */
+selectedSeats.push(i)
+
+}
+
+seatArea.appendChild(seat)
+
+}
+
+function checkout(){
+
+alert(
+"Movie: "+selectedMovie+
+"\nTime: "+selectedTime+
+"\nSeats: "+selectedSeats+
+"\nTotal: Rp "+selectedSeats.length*35000
+)
+
+}
 
 document.getElementById("search").addEventListener("keyup",function(){
 
@@ -283,7 +361,7 @@ document.querySelectorAll(".movie").forEach(movie=>{
 
 let title=movie.innerText.toLowerCase()
 
-movie.style.display=title.includes(value) ? "block" : "none"
+movie.style.display=title.includes(value)?"block":"none"
 
 })
 
