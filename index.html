@@ -1,68 +1,107 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>FannFlix</title>
+
 <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
-<div class="container">
-
 <!-- SIDEBAR -->
+
 <div class="sidebar">
 
 <div class="profile">
+
 <img src="images/profile.jpg">
+
+<div>
 <h3>Fann</h3>
+<p>Switch Profiles</p>
 </div>
 
-<ul class="menu">
-<li>Home</li>
-<li>Movies</li>
-<li>My List</li>
+</div>
+
+<ul>
+
+<li>🏠 Home</li>
+<li>🔍 Search</li>
+<li>🔥 New & Popular</li>
+<li>🎬 Movies</li>
+<li>📺 TV Shows</li>
+<li>❤️ My List</li>
+
 </ul>
 
 </div>
 
 
 <!-- MAIN -->
+
 <div class="main">
 
-<!-- HERO SLIDER -->
+<!-- HERO -->
+
 <div class="hero">
 
 <img id="hero-img">
 
-<div class="hero-text">
+<div class="hero-info">
+
 <h1 id="hero-title"></h1>
+
 <p id="hero-desc"></p>
+
+<div class="hero-buttons">
+
+<button class="play">▶ Play</button>
+
+<button class="info">ℹ More Info</button>
+
+</div>
+
 </div>
 
 </div>
 
 
 <!-- SEARCH -->
+
 <div class="search-box">
 
 <input
 type="text"
+placeholder="Search movies..."
 id="search"
-placeholder="Search movie..."
 onkeyup="searchMovie()"
 />
 
 </div>
 
 
-<h2>Popular Movies</h2>
+<!-- MOVIE ROWS -->
 
-<div class="movies" id="movie-list"></div>
+<h2>Trending</h2>
+<div class="row" id="trending"></div>
+
+<h2>Popular</h2>
+<div class="row" id="popular"></div>
+
+<h2>Top Rated</h2>
+<div class="row" id="toprated"></div>
+
+<h2>My List</h2>
+<div class="row" id="mylist"></div>
 
 </div>
 
-</div>
 
 <script src="script.js"></script>
 
