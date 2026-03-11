@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
 <title>XXI Cinema</title>
+
 <link rel="stylesheet" href="style.css">
 
 </head>
@@ -17,15 +19,16 @@
 
 </header>
 
+
 <section class="hero">
 
 <h2>Welcome to XXI Cinema</h2>
-<p>Book your favorite movie tickets easily</p>
+<p>Book your movie tickets easily</p>
 
 </section>
 
 
-<h2 class="section-title">Now Playing</h2>
+<h2 class="title">Now Playing</h2>
 
 <div class="movie-container" id="movieList">
 
@@ -41,6 +44,7 @@
 
 </div>
 
+
 <div class="movie-card">
 
 <img src="https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg">
@@ -52,6 +56,7 @@
 <button onclick="buyTicket('The Dark Knight')">Buy Ticket</button>
 
 </div>
+
 
 <div class="movie-card">
 
@@ -68,7 +73,7 @@
 </div>
 
 
-<h2 class="section-title">Coming Soon</h2>
+<h2 class="title">Coming Soon</h2>
 
 <div class="movie-container">
 
@@ -95,13 +100,14 @@
 </div>
 
 
-<h2 class="section-title">Ticket History</h2>
+<h2 class="title">Ticket History</h2>
 
 <table>
 
 <thead>
 
 <tr>
+
 <th>Movie</th>
 <th>Seat</th>
 <th>Time</th>
@@ -109,6 +115,7 @@
 <th>Total</th>
 <th>E-Ticket</th>
 <th>Print</th>
+
 </tr>
 
 </thead>
@@ -116,6 +123,7 @@
 <tbody id="historyTable"></tbody>
 
 </table>
+
 
 
 <div class="popup" id="seatPopup">
@@ -160,6 +168,8 @@
 
 </select>
 
+<br><br>
+
 <button onclick="payTicket()">Pay</button>
 
 </div>
@@ -167,18 +177,28 @@
 </div>
 
 
+
 <div class="popup" id="ticketPopup">
 
-<div class="box" id="ticketDesign"></div>
+<div class="ticket-box">
+
+<button class="close-btn" onclick="closeTicket()">✖</button>
+
+<div id="ticketContent"></div>
 
 </div>
+
+</div>
+
 
 
 <div class="popup" id="trailerPopup">
 
 <div class="box">
 
-<iframe id="trailerVideo" width="560" height="315" src=""></iframe>
+<iframe id="trailerVideo" width="560" height="315"></iframe>
+
+<br><br>
 
 <button onclick="closeTrailer()">Close</button>
 
