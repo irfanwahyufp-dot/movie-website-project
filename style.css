@@ -1,110 +1,113 @@
 body{
-
 margin:0;
 font-family:Arial;
 background:#0f0f0f;
 color:white;
-
 }
 
 header{
-
 display:flex;
 justify-content:space-between;
 align-items:center;
 padding:20px;
 background:black;
-
 }
 
-nav a{
-
-margin-left:20px;
-color:white;
-text-decoration:none;
-
+header input{
+padding:8px;
+border-radius:5px;
+border:none;
 }
 
-.movie-section{
+.hero{
+height:350px;
+background:url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba") center/cover;
+display:flex;
+align-items:center;
+padding-left:60px;
+}
 
+.hero button{
+background:gold;
+border:none;
+padding:10px 20px;
+border-radius:5px;
+}
+
+.slider-section{
 padding:40px;
-
 }
 
-.movie-container{
+.slider{
+display:flex;
+gap:20px;
+overflow-x:auto;
+}
 
+.slider img{
+height:200px;
+border-radius:10px;
+}
+
+.movies{
+padding:40px;
+}
+
+.movie-grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:30px;
-
 }
 
 .movie{
-
 background:#1a1a1a;
-border-radius:10px;
 padding:15px;
+border-radius:10px;
 text-align:center;
-
 }
 
 .movie img{
-
 width:100%;
 height:350px;
 object-fit:cover;
-border-radius:8px;
-
+border-radius:10px;
 }
 
 .rating{
-
 color:gold;
 margin:10px;
-
 }
 
 .movie button{
-
 width:100%;
 padding:10px;
 margin-top:6px;
-border:none;
 background:gold;
+border:none;
 border-radius:5px;
 cursor:pointer;
-
 }
 
 .history{
-
 padding:40px;
-
 }
 
 table{
-
 width:100%;
 border-collapse:collapse;
-
 }
 
 th,td{
-
 padding:12px;
-text-align:center;
 border-bottom:1px solid #333;
-
+text-align:center;
 }
 
 th{
-
 background:#1c1c1c;
-
 }
 
 .popup{
-
 display:none;
 position:fixed;
 top:0;
@@ -114,38 +117,34 @@ height:100%;
 background:rgba(0,0,0,0.8);
 justify-content:center;
 align-items:center;
-
 }
 
-.popup-box{
-
+.box{
 background:#1a1a1a;
 padding:30px;
 border-radius:10px;
 text-align:center;
-
 }
 
 #seats{
-
 display:grid;
 grid-template-columns:repeat(5,40px);
 gap:10px;
 margin:20px;
-
 }
 
 .seat{
-
 width:40px;
 height:40px;
 background:gray;
 cursor:pointer;
-
 }
 
 .seat.selected{
-
 background:gold;
+}
 
+.ticket{
+border:2px dashed gold;
+padding:20px;
 }
