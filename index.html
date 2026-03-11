@@ -14,8 +14,6 @@
 
 <body>
 
-<!-- SIDEBAR -->
-
 <div class="sidebar">
 
 <div class="profile">
@@ -32,7 +30,7 @@
 <ul>
 
 <li>🏠 Home</li>
-<li>🔍 Search</li>
+<li>🔎 Search</li>
 <li>🔥 New & Popular</li>
 <li>🎬 Movies</li>
 <li>📺 TV Shows</li>
@@ -43,11 +41,7 @@
 </div>
 
 
-<!-- MAIN -->
-
 <div class="main">
-
-<!-- HERO -->
 
 <div class="hero">
 
@@ -59,24 +53,17 @@
 
 <p id="hero-desc"></p>
 
-<div class="hero-buttons">
-
 <button class="play">▶ Play</button>
-
-<button class="info">ℹ More Info</button>
-
-</div>
+<button class="info">More Info</button>
 
 </div>
 
 </div>
 
-
-<!-- SEARCH -->
 
 <div class="search-box">
 
-<input
+<input 
 type="text"
 placeholder="Search movies..."
 id="search"
@@ -86,22 +73,10 @@ onkeyup="searchMovie()"
 </div>
 
 
-<!-- MOVIE ROWS -->
-
 <h2>Trending</h2>
-<div class="row" id="trending"></div>
-
-<h2>Popular</h2>
-<div class="row" id="popular"></div>
-
-<h2>Top Rated</h2>
-<div class="row" id="toprated"></div>
-
-<h2>My List</h2>
-<div class="row" id="mylist"></div>
+<div class="movie-row" id="movies"></div>
 
 </div>
-
 
 <script src="script.js"></script>
 
