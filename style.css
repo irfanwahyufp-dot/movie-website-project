@@ -1,94 +1,120 @@
-body{
-
-font-family:Arial;
-background:#0b0b0b;
-color:white;
+*{
 margin:0;
-
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
 }
 
-header{
+body{
+background:#0b0b0b;
+color:white;
+}
 
+/* HEADER */
+
+header{
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:20px;
+padding:20px 60px;
 background:black;
+}
 
+header h1{
+font-size:28px;
 }
 
 header input{
-
-padding:8px;
-border-radius:5px;
+padding:10px 15px;
 border:none;
-
+border-radius:5px;
+width:200px;
 }
+
+/* HERO */
 
 .hero{
-
 text-align:center;
-padding:60px;
+padding:80px 20px;
 background:linear-gradient(to right,#000,#222);
-
+margin-bottom:40px;
 }
 
-.section-title{
-
-margin-left:30px;
-margin-top:40px;
-
+.hero h2{
+font-size:32px;
+margin-bottom:10px;
 }
+
+/* TITLE */
+
+.title{
+margin-left:60px;
+margin-bottom:20px;
+font-size:26px;
+}
+
+/* MOVIE GRID */
 
 .movie-container{
 
-display:flex;
-gap:30px;
-padding:30px;
-flex-wrap:wrap;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:40px;
+padding:0 60px 60px 60px;
 
 }
 
+/* MOVIE CARD */
+
 .movie-card{
 
-background:#1b1b1b;
-padding:15px;
-border-radius:10px;
+background:#1c1c1c;
+border-radius:12px;
+overflow:hidden;
 text-align:center;
-width:250px;
+padding:15px;
 transition:0.3s;
 
 }
 
 .movie-card:hover{
-
-transform:scale(1.05);
-
+transform:translateY(-10px);
 }
 
 .movie-card img{
 
 width:100%;
-border-radius:10px;
+height:320px;
+object-fit:cover;
+border-radius:8px;
 
 }
+
+.movie-card h3{
+margin:15px 0;
+}
+
+/* BUTTON */
 
 button{
 
 background:#f5c518;
 border:none;
-padding:10px;
-margin-top:10px;
-cursor:pointer;
-border-radius:5px;
+padding:12px;
 width:100%;
+margin-top:10px;
+border-radius:6px;
+font-weight:bold;
+cursor:pointer;
 
 }
+
+/* TABLE */
 
 table{
 
 width:90%;
-margin:auto;
+margin:40px auto;
 border-collapse:collapse;
 
 }
@@ -96,10 +122,16 @@ border-collapse:collapse;
 th,td{
 
 border:1px solid #333;
-padding:10px;
+padding:12px;
 text-align:center;
 
 }
+
+th{
+background:#111;
+}
+
+/* POPUP */
 
 .popup{
 
@@ -109,11 +141,14 @@ left:0;
 width:100%;
 height:100%;
 background:rgba(0,0,0,0.8);
+
 display:none;
 justify-content:center;
 align-items:center;
 
 }
+
+/* BOX */
 
 .box{
 
@@ -121,9 +156,33 @@ background:#1c1c1c;
 padding:30px;
 border-radius:10px;
 text-align:center;
-position:relative;
 
 }
+
+/* TICKET */
+
+.ticket-box{
+
+background:#1c1c1c;
+padding:40px;
+border-radius:10px;
+position:relative;
+text-align:center;
+
+}
+
+.ticket{
+
+border:2px dashed yellow;
+padding:25px;
+
+}
+
+.ticket img{
+margin-top:15px;
+}
+
+/* CLOSE BUTTON */
 
 .close-btn{
 
@@ -133,22 +192,33 @@ right:10px;
 background:red;
 color:white;
 border:none;
+width:30px;
+height:30px;
+border-radius:50%;
+font-size:16px;
 cursor:pointer;
 
+}
+
+/* SEATS */
+
+#seats{
+margin:15px 0;
 }
 
 .seat{
 
 display:inline-block;
-background:gray;
+background:#555;
 padding:10px;
 margin:5px;
 cursor:pointer;
+border-radius:4px;
 
 }
 
 .seat.selected{
 
-background:green;
+background:#00c853;
 
 }
