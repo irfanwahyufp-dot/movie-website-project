@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>FannFlix</title>
 
 <link rel="stylesheet" href="style.css">
@@ -16,17 +14,15 @@
 <body>
 
 
-<!-- SIDEBAR -->
-
 <div class="sidebar">
 
 <div class="profile">
 
-<img src="images/profile.jpg">
+<img src="https://i.pravatar.cc/40">
 
 <div>
 
-<h3>Fann</h3>
+<h4>Fann</h4>
 <p>Switch Profiles</p>
 
 </div>
@@ -36,12 +32,14 @@
 
 <ul>
 
-<li>🏠 Home</li>
 <li>🔍 Search</li>
+<li class="active">🏠 Home</li>
+<li>✨ Surprise Me</li>
 <li>🔥 New & Popular</li>
-<li>🎬 Movies</li>
 <li>📺 TV Shows</li>
-<li>❤️ My List</li>
+<li>🎬 Movies</li>
+<li>📂 Categories</li>
+<li>➕ My List</li>
 
 </ul>
 
@@ -49,46 +47,35 @@
 
 
 
-<!-- MAIN -->
-
 <div class="main">
 
 
-<!-- HERO -->
-
 <div class="hero">
+
+<div class="hero-overlay"></div>
 
 <img id="hero-img">
 
-<div class="hero-content">
+<div class="hero-info">
 
 <h1 id="hero-title"></h1>
 
 <p id="hero-desc"></p>
 
-<div class="buttons">
-
 <button class="play">▶ Play</button>
-
 <button class="info">More Info</button>
 
 </div>
 
 </div>
 
-</div>
 
 
-
-<!-- MOVIE ROW -->
-
-<h2 class="section-title">Trending Now</h2>
-
-<div class="movie-row" id="movies"></div>
-
+<div class="row" id="movies"></div>
 
 
 </div>
+
 
 
 <script src="script.js"></script>
