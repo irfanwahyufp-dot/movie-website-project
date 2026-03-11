@@ -9,33 +9,43 @@
 
 <body>
 
-<header>
+<header class="navbar">
 
-<h1>XXI Cinema</h1>
+<h1 class="logo">XXI Cinema</h1>
 
 <nav>
+
 <a href="#">Home</a>
-<a href="#">Now Playing</a>
+<a href="#">Movies</a>
 <a href="#">Coming Soon</a>
+
 </nav>
 
 </header>
 
 
+<section class="hero">
+
+<h2>Now Showing</h2>
+<p>Book your movie tickets online</p>
+
+</section>
+
+
 <section class="movies">
 
-<div class="movie">
+<div class="movie-card">
 
-<img src="https://m.media-amazon.com/images/I/81ExhpBEbHL.jpg">
+<img src="https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg">
+
+<div class="movie-info">
 
 <h3>Avengers Endgame</h3>
 
-⭐ ⭐ ⭐ ⭐ ⭐
-
-<br><br>
+<div class="rating">⭐⭐⭐⭐⭐</div>
 
 <button onclick="watchTrailer('https://www.youtube.com/embed/TcMBFSGVi1c')">
-Trailer
+Watch Trailer
 </button>
 
 <button onclick="buyTicket('Avengers Endgame')">
@@ -44,19 +54,21 @@ Buy Ticket
 
 </div>
 
+</div>
 
-<div class="movie">
 
-<img src="https://m.media-amazon.com/images/I/51EbJjlLgRL.jpg">
+<div class="movie-card">
+
+<img src="https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg">
+
+<div class="movie-info">
 
 <h3>The Dark Knight</h3>
 
-⭐ ⭐ ⭐ ⭐ ⭐
-
-<br><br>
+<div class="rating">⭐⭐⭐⭐⭐</div>
 
 <button onclick="watchTrailer('https://www.youtube.com/embed/EXeTwQWrcwY')">
-Trailer
+Watch Trailer
 </button>
 
 <button onclick="buyTicket('The Dark Knight')">
@@ -65,19 +77,21 @@ Buy Ticket
 
 </div>
 
+</div>
 
-<div class="movie">
 
-<img src="https://m.media-amazon.com/images/I/71yVq+Y8i-L._AC_SL1000_.jpg">
+<div class="movie-card">
+
+<img src="https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg">
+
+<div class="movie-info">
 
 <h3>Interstellar</h3>
 
-⭐ ⭐ ⭐ ⭐ ⭐
-
-<br><br>
+<div class="rating">⭐⭐⭐⭐⭐</div>
 
 <button onclick="watchTrailer('https://www.youtube.com/embed/zSWdZVtXT7E')">
-Trailer
+Watch Trailer
 </button>
 
 <button onclick="buyTicket('Interstellar')">
@@ -86,21 +100,25 @@ Buy Ticket
 
 </div>
 
+</div>
+
 </section>
 
 
-<h2 class="history-title">Riwayat Tiket</h2>
+<section class="tickets">
+
+<h2>Ticket History</h2>
 
 <div id="ticketHistory"></div>
 
+</section>
 
-<!-- Trailer Popup -->
 
 <div id="trailerPopup" class="popup">
 
 <div class="popup-content">
 
-<iframe id="trailerFrame" width="400" height="250"></iframe>
+<iframe id="trailerFrame" width="600" height="350"></iframe>
 
 <button onclick="closeTrailer()">Close</button>
 
@@ -109,34 +127,30 @@ Buy Ticket
 </div>
 
 
-<!-- Seat Picker -->
-
 <div id="seatPopup" class="popup">
 
 <div class="popup-content">
 
-<h3>Pilih Kursi</h3>
+<h3>Select Seat</h3>
 
 <div id="seats"></div>
 
-<button onclick="confirmSeat()">Lanjut Pembayaran</button>
+<button onclick="confirmSeat()">Continue</button>
 
 </div>
 
 </div>
 
-
-<!-- Payment -->
 
 <div id="paymentPopup" class="popup">
 
 <div class="popup-content">
 
-<h3>Pilih Pembayaran</h3>
+<h3>Payment</h3>
 
 <select id="paymentMethod" onchange="changePayment()">
 
-<option value="">Pilih metode</option>
+<option value="">Select Method</option>
 <option value="qris">QRIS</option>
 <option value="ewallet">E-Wallet</option>
 
@@ -158,14 +172,12 @@ Buy Ticket
 <option>DANA</option>
 <option>ShopeePay</option>
 <option>OVO</option>
-<option>Bank BCA</option>
-<option>Bank BRI</option>
 
 </select>
 
 </div>
 
-<button onclick="payNow()">Bayar</button>
+<button onclick="payNow()">Pay Now</button>
 
 </div>
 
