@@ -1,161 +1,138 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 
-<meta charset="UTF-8">
 <title>XXI Cinema</title>
 <link rel="stylesheet" href="style.css">
 
-<style>
-
-body{
-font-family:Arial;
-background:#0f0f0f;
-color:white;
-margin:0;
-text-align:center;
-}
-
-h1{
-margin-top:30px;
-}
-
-.movies{
-display:flex;
-justify-content:center;
-gap:30px;
-margin-top:40px;
-flex-wrap:wrap;
-}
-
-.movie{
-background:#1c1c1c;
-padding:15px;
-border-radius:10px;
-width:200px;
-}
-
-.movie img{
-width:100%;
-border-radius:8px;
-}
-
-.movie button{
-margin-top:10px;
-width:100%;
-padding:10px;
-border:none;
-background:gold;
-border-radius:6px;
-cursor:pointer;
-font-weight:bold;
-}
-
-.ticketHistory{
-margin-top:50px;
-}
-
-.ticket{
-background:#1c1c1c;
-padding:15px;
-margin:10px auto;
-width:250px;
-border-radius:8px;
-}
-
-.ticket button{
-margin-top:10px;
-padding:6px 10px;
-cursor:pointer;
-}
-
-.popup{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.8);
-justify-content:center;
-align-items:center;
-}
-
-.popup-content{
-background:#1c1c1c;
-padding:20px;
-border-radius:10px;
-width:300px;
-}
-
-.popup select{
-width:100%;
-padding:8px;
-margin-top:10px;
-}
-
-.popup button{
-margin-top:15px;
-padding:10px;
-width:100%;
-background:gold;
-border:none;
-border-radius:6px;
-cursor:pointer;
-}
-
-.qr{
-margin-top:10px;
-}
-
-</style>
-
 </head>
+
 <body>
 
-<h1>🎬 XXI Cinema</h1>
+<header>
 
-<div class="movies">
+<h1>XXI Cinema</h1>
+
+<nav>
+<a href="#">Home</a>
+<a href="#">Now Playing</a>
+<a href="#">Coming Soon</a>
+</nav>
+
+</header>
+
+
+<section class="movies">
 
 <div class="movie">
+
 <img src="https://m.media-amazon.com/images/I/81ExhpBEbHL.jpg">
+
 <h3>Avengers Endgame</h3>
-<button onclick="buyTicket('Avengers Endgame')">Buy Ticket</button>
+
+⭐ ⭐ ⭐ ⭐ ⭐
+
+<br><br>
+
+<button onclick="watchTrailer('https://www.youtube.com/embed/TcMBFSGVi1c')">
+Trailer
+</button>
+
+<button onclick="buyTicket('Avengers Endgame')">
+Buy Ticket
+</button>
+
 </div>
 
+
 <div class="movie">
+
 <img src="https://m.media-amazon.com/images/I/51EbJjlLgRL.jpg">
+
 <h3>The Dark Knight</h3>
-<button onclick="buyTicket('The Dark Knight')">Buy Ticket</button>
+
+⭐ ⭐ ⭐ ⭐ ⭐
+
+<br><br>
+
+<button onclick="watchTrailer('https://www.youtube.com/embed/EXeTwQWrcwY')">
+Trailer
+</button>
+
+<button onclick="buyTicket('The Dark Knight')">
+Buy Ticket
+</button>
+
 </div>
+
 
 <div class="movie">
+
 <img src="https://m.media-amazon.com/images/I/71yVq+Y8i-L._AC_SL1000_.jpg">
+
 <h3>Interstellar</h3>
-<button onclick="buyTicket('Interstellar')">Buy Ticket</button>
-</div>
+
+⭐ ⭐ ⭐ ⭐ ⭐
+
+<br><br>
+
+<button onclick="watchTrailer('https://www.youtube.com/embed/zSWdZVtXT7E')">
+Trailer
+</button>
+
+<button onclick="buyTicket('Interstellar')">
+Buy Ticket
+</button>
 
 </div>
 
+</section>
 
-<!-- TICKET HISTORY -->
 
-<div class="ticketHistory">
-
-<h2>Ticket History</h2>
+<h2 class="history-title">Riwayat Tiket</h2>
 
 <div id="ticketHistory"></div>
 
+
+<!-- Trailer Popup -->
+
+<div id="trailerPopup" class="popup">
+
+<div class="popup-content">
+
+<iframe id="trailerFrame" width="400" height="250"></iframe>
+
+<button onclick="closeTrailer()">Close</button>
+
+</div>
+
 </div>
 
 
-<!-- POPUP PAYMENT -->
+<!-- Seat Picker -->
+
+<div id="seatPopup" class="popup">
+
+<div class="popup-content">
+
+<h3>Pilih Kursi</h3>
+
+<div id="seats"></div>
+
+<button onclick="confirmSeat()">Lanjut Pembayaran</button>
+
+</div>
+
+</div>
+
+
+<!-- Payment -->
 
 <div id="paymentPopup" class="popup">
 
 <div class="popup-content">
 
-<h3>Pilih Metode Pembayaran</h3>
+<h3>Pilih Pembayaran</h3>
 
 <select id="paymentMethod" onchange="changePayment()">
 
@@ -166,9 +143,9 @@ margin-top:10px;
 </select>
 
 
-<div id="qrisBox" style="display:none" class="qr">
+<div id="qrisBox" style="display:none">
 
-<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=XXICINEMA_PAYMENT">
+<img id="qrTicket">
 
 </div>
 
@@ -183,15 +160,12 @@ margin-top:10px;
 <option>OVO</option>
 <option>Bank BCA</option>
 <option>Bank BRI</option>
-<option>Bank Mandiri</option>
 
 </select>
 
 </div>
 
-<button onclick="payNow()">Bayar Sekarang</button>
-
-<button onclick="closePopup()">Batal</button>
+<button onclick="payNow()">Bayar</button>
 
 </div>
 
