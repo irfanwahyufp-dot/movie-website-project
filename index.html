@@ -1,191 +1,68 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-
-<title>XXI Cinema</title>
+<title>FannFlix</title>
 <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
 
-<header>
+<div class="container">
 
-<h1>🎬 XXI Cinema</h1>
+<!-- SIDEBAR -->
+<div class="sidebar">
 
-<input type="text" id="searchMovie" placeholder="Search Movie..." onkeyup="searchMovie()">
+<div class="profile">
+<img src="images/profile.jpg">
+<h3>Fann</h3>
+</div>
 
-</header>
-
-<section class="hero">
-
-<h2>Welcome to XXI Cinema</h2>
-<p>Book your favorite movie tickets easily</p>
-
-</section>
-
-
-<h2 class="section-title">Now Playing</h2>
-
-<div class="movie-container" id="movieList">
-
-<div class="movie-card">
-
-<img src="https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg">
-
-<h3>Avengers Endgame</h3>
-
-<button onclick="watchTrailer('https://www.youtube.com/embed/TcMBFSGVi1c')">Trailer</button>
-
-<button onclick="buyTicket('Avengers Endgame')">Buy Ticket</button>
+<ul class="menu">
+<li>Home</li>
+<li>Movies</li>
+<li>My List</li>
+</ul>
 
 </div>
 
-<div class="movie-card">
 
-<img src="https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg">
+<!-- MAIN -->
+<div class="main">
 
-<h3>The Dark Knight</h3>
+<!-- HERO SLIDER -->
+<div class="hero">
 
-<button onclick="watchTrailer('https://www.youtube.com/embed/EXeTwQWrcwY')">Trailer</button>
+<img id="hero-img">
 
-<button onclick="buyTicket('The Dark Knight')">Buy Ticket</button>
-
-</div>
-
-<div class="movie-card">
-
-<img src="https://image.tmdb.org/t/p/w500/rAiYTfKGqDCRIIqo664sY9XZIvQ.jpg">
-
-<h3>Interstellar</h3>
-
-<button onclick="watchTrailer('https://www.youtube.com/embed/zSWdZVtXT7E')">Trailer</button>
-
-<button onclick="buyTicket('Interstellar')">Buy Ticket</button>
-
+<div class="hero-text">
+<h1 id="hero-title"></h1>
+<p id="hero-desc"></p>
 </div>
 
 </div>
 
 
-<h2 class="section-title">Coming Soon</h2>
+<!-- SEARCH -->
+<div class="search-box">
 
-<div class="movie-container">
-
-<div class="movie-card">
-
-<img src="https://image.tmdb.org/t/p/w500/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg">
-
-<h3>Spider Man</h3>
-
-<button disabled>Coming Soon</button>
-
-</div>
-
-<div class="movie-card">
-
-<img src="https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg">
-
-<h3>Joker</h3>
-
-<button disabled>Coming Soon</button>
-
-</div>
+<input
+type="text"
+id="search"
+placeholder="Search movie..."
+onkeyup="searchMovie()"
+/>
 
 </div>
 
 
-<h2 class="section-title">Ticket History</h2>
+<h2>Popular Movies</h2>
 
-<table>
-
-<thead>
-
-<tr>
-<th>Movie</th>
-<th>Seat</th>
-<th>Time</th>
-<th>Payment</th>
-<th>Total</th>
-<th>E-Ticket</th>
-<th>Print</th>
-</tr>
-
-</thead>
-
-<tbody id="historyTable"></tbody>
-
-</table>
-
-
-<div class="popup" id="seatPopup">
-
-<div class="box">
-
-<h2>Select Showtime</h2>
-
-<select id="showtime">
-
-<option>10:00</option>
-<option>13:00</option>
-<option>16:00</option>
-<option>19:00</option>
-<option>21:00</option>
-
-</select>
-
-<h2>Select Seat</h2>
-
-<div id="seats"></div>
-
-<button onclick="nextPayment()">Next</button>
+<div class="movies" id="movie-list"></div>
 
 </div>
 
 </div>
-
-
-<div class="popup" id="paymentPopup">
-
-<div class="box">
-
-<h2>Payment Method</h2>
-
-<select id="paymentMethod">
-
-<option>DANA</option>
-<option>OVO</option>
-<option>GoPay</option>
-<option>Cash</option>
-
-</select>
-
-<button onclick="payTicket()">Pay</button>
-
-</div>
-
-</div>
-
-
-<div class="popup" id="ticketPopup">
-
-<div class="box" id="ticketDesign"></div>
-
-</div>
-
-
-<div class="popup" id="trailerPopup">
-
-<div class="box">
-
-<iframe id="trailerVideo" width="560" height="315" src=""></iframe>
-
-<button onclick="closeTrailer()">Close</button>
-
-</div>
-
-</div>
-
 
 <script src="script.js"></script>
 
