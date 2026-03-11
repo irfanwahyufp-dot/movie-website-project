@@ -1,23 +1,23 @@
-let selectedMovie=""
-let selectedSeat=""
+let movieSelected = ""
+let seatSelected = ""
 
-function watchTrailer(link){
+function trailer(link){
 
+document.getElementById("video").src = link
 document.getElementById("trailerPopup").style.display="flex"
-document.getElementById("trailerFrame").src=link
 
 }
 
 function closeTrailer(){
 
 document.getElementById("trailerPopup").style.display="none"
-document.getElementById("trailerFrame").src=""
 
 }
 
+
 function buyTicket(movie){
 
-selectedMovie=movie
+movieSelected = movie
 
 document.getElementById("seatPopup").style.display="flex"
 
@@ -25,31 +25,39 @@ createSeats()
 
 }
 
+
 function createSeats(){
 
-let seats=document.getElementById("seats")
+let seats = document.getElementById("seats")
 
 seats.innerHTML=""
 
 for(let i=1;i<=20;i++){
 
-seats.innerHTML+=`<div class="seat" onclick="selectSeat(${i})">${i}</div>`
+let seat=document.createElement("div")
 
-}
+seat.className="seat"
 
-}
+seat.innerText=i
 
-function selectSeat(num){
-
-selectedSeat=num
+seat.onclick=function(){
 
 document.querySelectorAll(".seat").forEach(s=>s.classList.remove("selected"))
 
-event.target.classList.add("selected")
+seat.classList.add("selected")
+
+seatSelected=i
 
 }
 
-function confirmSeat(){
+seats.appendChild(seat)
+
+}
+
+}
+
+
+function continuePayment(){
 
 document.getElementById("seatPopup").style.display="none"
 
@@ -57,126 +65,37 @@ document.getElementById("paymentPopup").style.display="flex"
 
 }
 
-function changePayment(){
 
-let method=document.getElementById("paymentMethod").value
+function pay(){
 
-document.getElementById("qrisBox").style.display=
-method==="qris"?"block":"none"
-
-document.getElementById("ewalletBox").style.display=
-method==="ewallet"?"block":"none"
-
-if(method==="qris"){
-
-document.getElementById("qrTicket").src=
-"https://api.qrserver.com/v1/create-qr-code/?size=200x200&data="+selectedMovie
-
-}
-
-}
-
-function payNow(){
-
-let method=document.getElementById("paymentMethod").value
-
-let payment="QRIS"
-
-if(method==="ewallet"){
-
-payment=document.getElementById("wallet").value
-
-}
-
-let ticket={
-
-movie:selectedMovie,
-seat:selectedSeat,
-payment:payment,
-total:35000
-
-}
-
-let tickets=JSON.parse(localStorage.getItem("tickets"))||[]
-
-tickets.push(ticket)
-
-localStorage.setItem("tickets",JSON.stringify(tickets))
+let payment=document.getElementById("paymentMethod").value
 
 document.getElementById("paymentPopup").style.display="none"
 
-showTickets()
+addHistory(movieSelected,seatSelected,payment)
 
 }
 
-function showTickets(){
 
-let tickets=JSON.parse(localStorage.getItem("tickets"))||[]
+function addHistory(movie,seat,payment){
 
-let box=document.getElementById("ticketHistory")
+let table=document.getElementById("ticketHistory")
 
-box.innerHTML=""
+let row=document.createElement("tr")
 
-tickets.forEach((t,i)=>{
+let qr=`https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${movie}-${seat}`
 
-box.innerHTML+=`
+row.innerHTML=`
 
-<div class="ticket">
-
-<b>${t.movie}</b>
-
-<p>Seat : ${t.seat}</p>
-
-<p>Total : Rp ${t.total}</p>
-
-<p>Payment : ${t.payment}</p>
-
-<img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${t.movie}-${t.seat}">
-
-<br><br>
-
-<button onclick="printTicket(${i})">
-Cetak Struk
-</button>
-
-</div>
+<td>${movie}</td>
+<td>${seat}</td>
+<td>${payment}</td>
+<td>Rp 35000</td>
+<td><img src="${qr}"></td>
+<td><button onclick="print()">Print</button></td>
 
 `
 
-})
+table.appendChild(row)
 
 }
-
-function printTicket(i){
-
-let tickets=JSON.parse(localStorage.getItem("tickets"))
-
-let t=tickets[i]
-
-let w=window.open("","","width=400,height=600")
-
-w.document.write(`
-
-<h2>XXI Cinema</h2>
-
-<hr>
-
-<p>Movie : ${t.movie}</p>
-
-<p>Seat : ${t.seat}</p>
-
-<p>Payment : ${t.payment}</p>
-
-<p>Total : Rp ${t.total}</p>
-
-<hr>
-
-Enjoy The Movie
-
-`)
-
-w.print()
-
-}
-
-window.onload=showTickets
