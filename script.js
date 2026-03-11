@@ -1,47 +1,31 @@
-const APIKEY="2b3f5b8a0f2f3c7d19f6e7eae4c0b123"
+const API =
+"https://api.tvmaze.com/shows"
 
-const IMG="https://image.tmdb.org/t/p/w500"
-const HERO="https://image.tmdb.org/t/p/original"
+const IMG =
+"https://static.tvmaze.com/uploads/images/medium_portrait"
 
-let allMovies=[]
+let movies = []
 
-/* FETCH DATA */
-
-fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${APIKEY}`)
+fetch(API)
 .then(res=>res.json())
 .then(data=>{
 
-allMovies=data.results
+movies=data
 
-createRow(data.results,"trending")
+showMovies(data)
 
 startHero()
 
 })
 
-fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${APIKEY}`)
-.then(res=>res.json())
-.then(data=>{
+function showMovies(data){
 
-createRow(data.results,"popular")
+const container=
+document.getElementById("movies")
 
-})
+container.innerHTML=""
 
-fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${APIKEY}`)
-.then(res=>res.json())
-.then(data=>{
-
-createRow(data.results,"toprated")
-
-})
-
-/* CREATE MOVIE ROW */
-
-function createRow(data,id){
-
-const container=document.getElementById(id)
-
-data.forEach(movie=>{
+data.slice(0,30).forEach(movie=>{
 
 const div=document.createElement("div")
 
@@ -49,15 +33,11 @@ div.classList.add("movie")
 
 div.innerHTML=`
 
-<img src="${IMG+movie.poster_path}">
+<img src="${movie.image.medium}">
 
 <div class="preview">
 
-<h4>${movie.title}</h4>
-
-<p>⭐ ${movie.vote_average}</p>
-
-<button onclick='addMyList(${JSON.stringify(movie)})'>+ My List</button>
+<h4>${movie.name}</h4>
 
 </div>
 
@@ -69,28 +49,30 @@ container.appendChild(div)
 
 }
 
+/* hero slider */
 
-/* HERO SLIDER */
-
-let heroIndex=0
+let index=0
 
 function startHero(){
 
 setInterval(()=>{
 
-const movie=allMovies[heroIndex]
+const movie=movies[index]
 
-document.getElementById("hero-img").src=HERO+movie.backdrop_path
+document.getElementById("hero-img").src=
+movie.image.original
 
-document.getElementById("hero-title").innerText=movie.title
+document.getElementById("hero-title").innerText=
+movie.name
 
-document.getElementById("hero-desc").innerText=movie.overview.substring(0,150)+"..."
+document.getElementById("hero-desc").innerText=
+movie.summary.replace(/<[^>]+>/g,"").slice(0,120)
 
-heroIndex++
+index++
 
-if(heroIndex>=allMovies.length){
+if(index>=movies.length){
 
-heroIndex=0
+index=0
 
 }
 
@@ -98,70 +80,16 @@ heroIndex=0
 
 }
 
-
-/* SEARCH */
+/* search */
 
 function searchMovie(){
 
-const text=document.getElementById("search").value.toLowerCase()
+const text=
+document.getElementById("search").value.toLowerCase()
 
-const filtered=allMovies.filter(m=>m.title.toLowerCase().includes(text))
+const filtered=
+movies.filter(m=>m.name.toLowerCase().includes(text))
 
-const row=document.getElementById("trending")
-
-row.innerHTML=""
-
-createRow(filtered,"trending")
+showMovies(filtered)
 
 }
-
-
-/* MY LIST */
-
-function addMyList(movie){
-
-let list=JSON.parse(localStorage.getItem("mylist"))||[]
-
-list.push(movie)
-
-localStorage.setItem("mylist",JSON.stringify(list))
-
-showMyList()
-
-}
-
-function showMyList(){
-
-let list=JSON.parse(localStorage.getItem("mylist"))||[]
-
-const container=document.getElementById("mylist")
-
-container.innerHTML=""
-
-list.forEach(movie=>{
-
-const div=document.createElement("div")
-
-div.classList.add("movie")
-
-div.innerHTML=`
-
-<img src="${IMG+movie.poster_path}">
-
-<div class="preview">
-
-<h4>${movie.title}</h4>
-
-<p>⭐ ${movie.vote_average}</p>
-
-</div>
-
-`
-
-container.appendChild(div)
-
-})
-
-}
-
-showMyList()
