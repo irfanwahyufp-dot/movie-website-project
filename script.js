@@ -1,33 +1,144 @@
-const API =
-"https://api.themoviedb.org/3/movie/popular?api_key=demo&language=en-US&page=1"
+const APIKEY="2b3f5b8a0f2f3c7d19f6e7eae4c0b123"
 
-const IMG =
-"https://image.tmdb.org/t/p/w500"
+const IMG="https://image.tmdb.org/t/p/w500"
+const HERO="https://image.tmdb.org/t/p/original"
 
-const HERO =
-"https://image.tmdb.org/t/p/original"
+let allMovies=[]
 
-let movies = []
+/* FETCH DATA */
 
-fetch(API)
+fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${APIKEY}`)
 .then(res=>res.json())
 .then(data=>{
 
-movies = data.results
+allMovies=data.results
 
-showMovies(movies)
+createRow(data.results,"trending")
 
-startSlider()
+startHero()
 
 })
 
-function showMovies(data){
+fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${APIKEY}`)
+.then(res=>res.json())
+.then(data=>{
 
-const list=document.getElementById("movie-list")
+createRow(data.results,"popular")
 
-list.innerHTML=""
+})
+
+fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${APIKEY}`)
+.then(res=>res.json())
+.then(data=>{
+
+createRow(data.results,"toprated")
+
+})
+
+/* CREATE MOVIE ROW */
+
+function createRow(data,id){
+
+const container=document.getElementById(id)
 
 data.forEach(movie=>{
+
+const div=document.createElement("div")
+
+div.classList.add("movie")
+
+div.innerHTML=`
+
+<img src="${IMG+movie.poster_path}">
+
+<div class="preview">
+
+<h4>${movie.title}</h4>
+
+<p>⭐ ${movie.vote_average}</p>
+
+<button onclick='addMyList(${JSON.stringify(movie)})'>+ My List</button>
+
+</div>
+
+`
+
+container.appendChild(div)
+
+})
+
+}
+
+
+/* HERO SLIDER */
+
+let heroIndex=0
+
+function startHero(){
+
+setInterval(()=>{
+
+const movie=allMovies[heroIndex]
+
+document.getElementById("hero-img").src=HERO+movie.backdrop_path
+
+document.getElementById("hero-title").innerText=movie.title
+
+document.getElementById("hero-desc").innerText=movie.overview.substring(0,150)+"..."
+
+heroIndex++
+
+if(heroIndex>=allMovies.length){
+
+heroIndex=0
+
+}
+
+},4000)
+
+}
+
+
+/* SEARCH */
+
+function searchMovie(){
+
+const text=document.getElementById("search").value.toLowerCase()
+
+const filtered=allMovies.filter(m=>m.title.toLowerCase().includes(text))
+
+const row=document.getElementById("trending")
+
+row.innerHTML=""
+
+createRow(filtered,"trending")
+
+}
+
+
+/* MY LIST */
+
+function addMyList(movie){
+
+let list=JSON.parse(localStorage.getItem("mylist"))||[]
+
+list.push(movie)
+
+localStorage.setItem("mylist",JSON.stringify(list))
+
+showMyList()
+
+}
+
+function showMyList(){
+
+let list=JSON.parse(localStorage.getItem("mylist"))||[]
+
+const container=document.getElementById("mylist")
+
+container.innerHTML=""
+
+list.forEach(movie=>{
 
 const div=document.createElement("div")
 
@@ -47,55 +158,10 @@ div.innerHTML=`
 
 `
 
-list.appendChild(div)
+container.appendChild(div)
 
 })
 
 }
 
-
-/* SEARCH */
-
-function searchMovie(){
-
-const text =
-document.getElementById("search").value.toLowerCase()
-
-const filtered =
-movies.filter(m=>m.title.toLowerCase().includes(text))
-
-showMovies(filtered)
-
-}
-
-
-/* HERO SLIDER */
-
-let slide=0
-
-function startSlider(){
-
-setInterval(()=>{
-
-const movie=movies[slide]
-
-document.getElementById("hero-img").src=
-HERO+movie.backdrop_path
-
-document.getElementById("hero-title").innerText=
-movie.title
-
-document.getElementById("hero-desc").innerText=
-movie.overview.substring(0,120)+"..."
-
-slide++
-
-if(slide>=movies.length){
-
-slide=0
-
-}
-
-},3000)
-
-}
+showMyList()
