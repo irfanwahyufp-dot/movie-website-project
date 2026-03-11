@@ -1,6 +1,7 @@
+// film yang dipilih
 let selectedMovie = "";
-let totalPrice = 35000;
 
+// buka popup saat klik Buy Ticket
 function buyTicket(movie){
 
 selectedMovie = movie;
@@ -9,18 +10,20 @@ document.getElementById("paymentPopup").style.display = "flex";
 
 }
 
-function closePayment(){
+// tutup popup
+function closePopup(){
 
 document.getElementById("paymentPopup").style.display = "none";
 
 }
 
-function showPaymentOption(){
+// ganti metode pembayaran
+function changePayment(){
 
 let method = document.getElementById("paymentMethod").value;
 
-let qris = document.getElementById("qrisOption");
-let ewallet = document.getElementById("ewalletOption");
+let qris = document.getElementById("qrisBox");
+let ewallet = document.getElementById("ewalletBox");
 
 if(method === "qris"){
 
@@ -38,55 +41,49 @@ qris.style.display = "none";
 
 }
 
-function confirmPayment(){
+// proses pembayaran
+function payNow(){
 
-let paymentMethod = document.getElementById("paymentMethod").value;
+let method = document.getElementById("paymentMethod").value;
 
-let wallet = document.getElementById("walletList");
+let payment = "QRIS";
 
-let paymentDetail = "";
+if(method === "ewallet"){
 
-if(paymentMethod === "ewallet"){
-
-paymentDetail = wallet.value;
-
-}else{
-
-paymentDetail = "QRIS";
+payment = document.getElementById("wallet").value;
 
 }
 
+// data tiket
 let ticket = {
 
 movie : selectedMovie,
 time : "12:30",
 seat : Math.floor(Math.random()*20)+1,
-total : totalPrice,
-payment : paymentDetail
+total : 35000,
+payment : payment
 
 };
 
-saveTicket(ticket);
-
-alert("Pembayaran berhasil!");
-
-closePayment();
-
-showTicketHistory();
-
-}
-
-function saveTicket(ticket){
-
+// ambil data lama
 let tickets = JSON.parse(localStorage.getItem("tickets")) || [];
 
+// tambah tiket baru
 tickets.push(ticket);
 
+// simpan ke localStorage
 localStorage.setItem("tickets", JSON.stringify(tickets));
+
+// tutup popup
+closePopup();
+
+// tampilkan tiket
+showTickets();
 
 }
 
-function showTicketHistory(){
+// tampilkan riwayat tiket
+function showTickets(){
 
 let tickets = JSON.parse(localStorage.getItem("tickets")) || [];
 
@@ -98,15 +95,15 @@ tickets.forEach((t,i)=>{
 
 container.innerHTML += `
 
-<div class="ticket-box">
+<div class="ticket">
 
-<p><b>Movie:</b> ${t.movie}</p>
-<p><b>Time:</b> ${t.time}</p>
-<p><b>Seat:</b> ${t.seat}</p>
-<p><b>Total:</b> Rp ${t.total}</p>
-<p><b>Payment:</b> ${t.payment}</p>
+<p><b>${t.movie}</b></p>
+<p>Time : ${t.time}</p>
+<p>Seat : ${t.seat}</p>
+<p>Total : Rp ${t.total}</p>
+<p>Payment : ${t.payment}</p>
 
-<button onclick="printReceipt(${i})">
+<button onclick="printTicket(${i})">
 Cetak Struk
 </button>
 
@@ -118,7 +115,8 @@ Cetak Struk
 
 }
 
-function printReceipt(index){
+// cetak struk
+function printTicket(index){
 
 let tickets = JSON.parse(localStorage.getItem("tickets"));
 
@@ -138,7 +136,7 @@ let receipt = `
 
 <hr>
 
-<p>Terima kasih sudah membeli tiket!</p>
+<p>Terima kasih telah membeli tiket</p>
 
 `;
 
@@ -152,4 +150,5 @@ win.print();
 
 }
 
-window.onload = showTicketHistory;
+// tampilkan tiket saat halaman dibuka
+window.onload = showTickets;
