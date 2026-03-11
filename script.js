@@ -1,25 +1,26 @@
 let selectedMovie=""
 let selectedSeat=""
 
-document.getElementById("search").addEventListener("keyup",function(){
+function searchMovie(){
 
-let filter=this.value.toLowerCase()
-let movies=document.querySelectorAll(".movie")
+let input=document.getElementById("searchMovie").value.toLowerCase()
+
+let movies=document.querySelectorAll(".movie-card")
 
 movies.forEach(movie=>{
 
-let title=movie.querySelector("h3").innerText.toLowerCase()
+let title=movie.innerText.toLowerCase()
 
-movie.style.display=title.includes(filter)?"block":"none"
-
-})
+movie.style.display=title.includes(input)?"block":"none"
 
 })
+
+}
 
 
 function watchTrailer(link){
 
-document.getElementById("video").src=link
+document.getElementById("trailerVideo").src=link
 document.getElementById("trailerPopup").style.display="flex"
 
 }
@@ -27,6 +28,7 @@ document.getElementById("trailerPopup").style.display="flex"
 function closeTrailer(){
 
 document.getElementById("trailerPopup").style.display="none"
+document.getElementById("trailerVideo").src=""
 
 }
 
@@ -37,27 +39,24 @@ selectedMovie=movie
 
 document.getElementById("seatPopup").style.display="flex"
 
-createSeats()
+generateSeats()
 
 }
 
 
-function createSeats(){
+function generateSeats(){
 
-let seats=document.getElementById("seats")
-seats.innerHTML=""
+let seatContainer=document.getElementById("seats")
 
-let rows=["A","B","C","D","E"]
+seatContainer.innerHTML=""
 
-rows.forEach(row=>{
-
-for(let i=1;i<=5;i++){
+for(let i=1;i<=20;i++){
 
 let seat=document.createElement("div")
 
 seat.className="seat"
 
-seat.innerText=row+i
+seat.innerText="A"+i
 
 seat.onclick=function(){
 
@@ -65,20 +64,25 @@ document.querySelectorAll(".seat").forEach(s=>s.classList.remove("selected"))
 
 seat.classList.add("selected")
 
-selectedSeat=row+i
+selectedSeat=seat.innerText
 
 }
 
-seats.appendChild(seat)
+seatContainer.appendChild(seat)
 
 }
 
-})
-
 }
 
 
-function continuePayment(){
+function nextPayment(){
+
+if(selectedSeat==""){
+
+alert("Select seat first")
+return
+
+}
 
 document.getElementById("seatPopup").style.display="none"
 
@@ -91,27 +95,30 @@ function payTicket(){
 
 let payment=document.getElementById("paymentMethod").value
 
+let time=document.getElementById("showtime").value
+
 document.getElementById("paymentPopup").style.display="none"
 
-createTicket(selectedMovie,selectedSeat,payment)
+createTicket(selectedMovie,selectedSeat,payment,time)
 
-addHistory(selectedMovie,selectedSeat,payment)
+addHistory(selectedMovie,selectedSeat,payment,time)
 
 }
 
 
-function createTicket(movie,seat,payment){
+function createTicket(movie,seat,payment,time){
 
 let qr=`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${movie}-${seat}`
 
 document.getElementById("ticketDesign").innerHTML=`
 
-<div class="ticket">
+<button class="close-btn" onclick="closeTicket()">✖</button>
 
 <h2>XXI CINEMA</h2>
 
 <p>Movie : ${movie}</p>
 <p>Seat : ${seat}</p>
+<p>Time : ${time}</p>
 <p>Payment : ${payment}</p>
 <p>Total : Rp 35000</p>
 
@@ -121,8 +128,6 @@ document.getElementById("ticketDesign").innerHTML=`
 
 <button onclick="window.print()">Print Ticket</button>
 
-</div>
-
 `
 
 document.getElementById("ticketPopup").style.display="flex"
@@ -130,23 +135,37 @@ document.getElementById("ticketPopup").style.display="flex"
 }
 
 
-function addHistory(movie,seat,payment){
+function closeTicket(){
+
+document.getElementById("ticketPopup").style.display="none"
+
+}
+
+
+function addHistory(movie,seat,payment,time){
+
+let table=document.getElementById("historyTable")
 
 let qr=`https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${movie}-${seat}`
 
-let row=document.createElement("tr")
+let row=`
 
-row.innerHTML=`
+<tr>
 
 <td>${movie}</td>
 <td>${seat}</td>
+<td>${time}</td>
 <td>${payment}</td>
 <td>Rp 35000</td>
+
 <td><img src="${qr}"></td>
+
 <td><button onclick="window.print()">Print</button></td>
+
+</tr>
 
 `
 
-document.getElementById("historyTable").appendChild(row)
+table.innerHTML+=row
 
 }
