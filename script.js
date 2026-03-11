@@ -18,7 +18,6 @@ movie.style.display=title.includes(input)?"block":"none"
 }
 
 
-
 function watchTrailer(link){
 
 document.getElementById("trailerVideo").src=link
@@ -34,7 +33,6 @@ document.getElementById("trailerVideo").src=""
 }
 
 
-
 function buyTicket(movie){
 
 selectedMovie=movie
@@ -46,12 +44,11 @@ generateSeats()
 }
 
 
-
 function generateSeats(){
 
-let container=document.getElementById("seats")
+let seatContainer=document.getElementById("seats")
 
-container.innerHTML=""
+seatContainer.innerHTML=""
 
 for(let i=1;i<=20;i++){
 
@@ -59,7 +56,7 @@ let seat=document.createElement("div")
 
 seat.className="seat"
 
-seat.innerText="D"+i
+seat.innerText="A"+i
 
 seat.onclick=function(){
 
@@ -71,12 +68,11 @@ selectedSeat=seat.innerText
 
 }
 
-container.appendChild(seat)
+seatContainer.appendChild(seat)
 
 }
 
 }
-
 
 
 function nextPayment(){
@@ -95,10 +91,10 @@ document.getElementById("paymentPopup").style.display="flex"
 }
 
 
-
 function payTicket(){
 
 let payment=document.getElementById("paymentMethod").value
+
 let time=document.getElementById("showtime").value
 
 document.getElementById("paymentPopup").style.display="none"
@@ -110,14 +106,13 @@ addHistory(selectedMovie,selectedSeat,payment,time)
 }
 
 
-
 function createTicket(movie,seat,payment,time){
 
 let qr=`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${movie}-${seat}`
 
-let html=`
+document.getElementById("ticketDesign").innerHTML=`
 
-<div class="ticket">
+<button class="close-btn" onclick="closeTicket()">✖</button>
 
 <h2>XXI CINEMA</h2>
 
@@ -133,16 +128,11 @@ let html=`
 
 <button onclick="window.print()">Print Ticket</button>
 
-</div>
-
 `
-
-document.getElementById("ticketContent").innerHTML=html
 
 document.getElementById("ticketPopup").style.display="flex"
 
 }
-
 
 
 function closeTicket(){
@@ -150,7 +140,6 @@ function closeTicket(){
 document.getElementById("ticketPopup").style.display="none"
 
 }
-
 
 
 function addHistory(movie,seat,payment,time){
@@ -168,7 +157,9 @@ let row=`
 <td>${time}</td>
 <td>${payment}</td>
 <td>Rp 35000</td>
+
 <td><img src="${qr}"></td>
+
 <td><button onclick="window.print()">Print</button></td>
 
 </tr>
