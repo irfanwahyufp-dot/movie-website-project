@@ -9,14 +9,14 @@
 
 <body>
 
-<header class="navbar">
+<header>
 
-<h1 class="logo">XXI Cinema</h1>
+<h1>XXI Cinema</h1>
 
 <nav>
 
 <a href="#">Home</a>
-<a href="#">Movies</a>
+<a href="#">Now Playing</a>
 <a href="#">Coming Soon</a>
 
 </nav>
@@ -24,79 +24,53 @@
 </header>
 
 
-<section class="hero">
+<section class="movie-section">
 
-<h2>Now Showing</h2>
-<p>Book your movie tickets online</p>
+<h2>Now Playing</h2>
 
-</section>
+<div class="movie-container">
 
-
-<section class="movies">
-
-<div class="movie-card">
+<div class="movie">
 
 <img src="https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg">
-
-<div class="movie-info">
 
 <h3>Avengers Endgame</h3>
 
 <div class="rating">⭐⭐⭐⭐⭐</div>
 
-<button onclick="watchTrailer('https://www.youtube.com/embed/TcMBFSGVi1c')">
-Watch Trailer
-</button>
+<button onclick="trailer('https://www.youtube.com/embed/TcMBFSGVi1c')">Trailer</button>
 
-<button onclick="buyTicket('Avengers Endgame')">
-Buy Ticket
-</button>
-
-</div>
+<button onclick="buyTicket('Avengers Endgame')">Buy Ticket</button>
 
 </div>
 
 
-<div class="movie-card">
+<div class="movie">
 
 <img src="https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg">
-
-<div class="movie-info">
 
 <h3>The Dark Knight</h3>
 
 <div class="rating">⭐⭐⭐⭐⭐</div>
 
-<button onclick="watchTrailer('https://www.youtube.com/embed/EXeTwQWrcwY')">
-Watch Trailer
-</button>
+<button onclick="trailer('https://www.youtube.com/embed/EXeTwQWrcwY')">Trailer</button>
 
-<button onclick="buyTicket('The Dark Knight')">
-Buy Ticket
-</button>
-
-</div>
+<button onclick="buyTicket('The Dark Knight')">Buy Ticket</button>
 
 </div>
 
 
-<div class="movie-card">
+<div class="movie">
 
 <img src="https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg">
-
-<div class="movie-info">
 
 <h3>Interstellar</h3>
 
 <div class="rating">⭐⭐⭐⭐⭐</div>
 
-<button onclick="watchTrailer('https://www.youtube.com/embed/zSWdZVtXT7E')">
-Watch Trailer
-</button>
+<button onclick="trailer('https://www.youtube.com/embed/zSWdZVtXT7E')">Trailer</button>
 
-<button onclick="buyTicket('Interstellar')">
-Buy Ticket
-</button>
+<button onclick="buyTicket('Interstellar')">Buy Ticket</button>
 
 </div>
 
@@ -105,79 +79,84 @@ Buy Ticket
 </section>
 
 
-<section class="tickets">
+
+<section class="history">
 
 <h2>Ticket History</h2>
 
-<div id="ticketHistory"></div>
+<table>
+
+<thead>
+
+<tr>
+
+<th>Movie</th>
+<th>Seat</th>
+<th>Payment</th>
+<th>Total</th>
+<th>QR</th>
+<th>Receipt</th>
+
+</tr>
+
+</thead>
+
+<tbody id="ticketHistory"></tbody>
+
+</table>
 
 </section>
 
 
-<div id="trailerPopup" class="popup">
 
-<div class="popup-content">
+<div class="popup" id="seatPopup">
 
-<iframe id="trailerFrame" width="600" height="350"></iframe>
-
-<button onclick="closeTrailer()">Close</button>
-
-</div>
-
-</div>
-
-
-<div id="seatPopup" class="popup">
-
-<div class="popup-content">
+<div class="popup-box">
 
 <h3>Select Seat</h3>
 
 <div id="seats"></div>
 
-<button onclick="confirmSeat()">Continue</button>
+<button onclick="continuePayment()">Continue</button>
 
 </div>
 
 </div>
 
 
-<div id="paymentPopup" class="popup">
 
-<div class="popup-content">
+<div class="popup" id="paymentPopup">
 
-<h3>Payment</h3>
+<div class="popup-box">
 
-<select id="paymentMethod" onchange="changePayment()">
+<h3>Payment Method</h3>
 
-<option value="">Select Method</option>
-<option value="qris">QRIS</option>
-<option value="ewallet">E-Wallet</option>
+<select id="paymentMethod">
+
+<option value="QRIS">QRIS</option>
+<option value="GoPay">GoPay</option>
+<option value="Dana">Dana</option>
+<option value="OVO">OVO</option>
 
 </select>
 
+<button onclick="pay()">Pay</button>
 
-<div id="qrisBox" style="display:none">
-
-<img id="qrTicket">
+</div>
 
 </div>
 
 
-<div id="ewalletBox" style="display:none">
 
-<select id="wallet">
+<div class="popup" id="trailerPopup">
 
-<option>GoPay</option>
-<option>DANA</option>
-<option>ShopeePay</option>
-<option>OVO</option>
+<div class="popup-box">
 
-</select>
+<iframe id="video" width="600" height="350"></iframe>
 
-</div>
+<br>
 
-<button onclick="payNow()">Pay Now</button>
+<button onclick="closeTrailer()">Close</button>
 
 </div>
 
