@@ -10,9 +10,9 @@
 
 </head>
 
-
 <body>
 
+<!-- SIDEBAR -->
 
 <div class="sidebar">
 
@@ -21,24 +21,19 @@
 <img src="images/profile.jpg">
 
 <div>
-
 <h4>Fann</h4>
 <p>Switch Profiles</p>
 
 </div>
-
 </div>
-
-
 <ul>
 
 <li>🔍 Search</li>
 <li class="active">🏠 Home</li>
-<li>✨ Surprise Me</li>
 <li>🔥 New & Popular</li>
 <li>📺 TV Shows</li>
 <li>🎬 Movies</li>
-<li>📂 Categories</li>
+<li>📁 Categories</li>
 <li>➕ My List</li>
 
 </ul>
@@ -46,41 +41,80 @@
 </div>
 
 
+<!-- MAIN -->
 
 <div class="main">
 
+<!-- HERO -->
 
 <div class="hero">
 
 <div class="hero-overlay"></div>
 
-<img id="hero-img">
+<div class="hero-content">
 
-<div class="hero-info">
+<h1 id="heroTitle"></h1>
 
-<h1 id="hero-title"></h1>
+<p id="heroDesc"></p>
 
-<p id="hero-desc"></p>
+<div class="hero-buttons">
 
-<button class="play">▶ Play</button>
-<button class="info">More Info</button>
+<button id="heroPlay">▶ Play Trailer</button>
+
+</div>
 
 </div>
 
 </div>
 
 
+<!-- MOVIE ROWS -->
 
-<div class="row" id="movies"></div>
+<section class="row">
 
+<h2>Trending Now</h2>
+
+<div class="movies" id="trending"></div>
+
+</section>
+
+
+<section class="row">
+
+<h2>Popular</h2>
+
+<div class="movies" id="popular"></div>
+
+</section>
+
+
+<section class="row">
+
+<h2>Top Rated</h2>
+
+<div class="movies" id="top"></div>
+
+</section>
 
 </div>
 
+
+<!-- TRAILER POPUP -->
+
+<div id="trailerModal" class="modal">
+
+<div class="modal-content">
+
+<span id="close">✖</span>
+
+<iframe id="trailerFrame" allowfullscreen></iframe>
+
+</div>
+
+</div>
 
 
 <script src="script.js"></script>
 
 </body>
-
 </html>
-
