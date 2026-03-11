@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <title>XXI Cinema</title>
 <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
@@ -13,71 +11,74 @@
 
 <h1>XXI Cinema</h1>
 
-<nav>
-
-<a href="#">Home</a>
-<a href="#">Now Playing</a>
-<a href="#">Coming Soon</a>
-
-</nav>
+<input type="text" id="search" placeholder="Search movie...">
 
 </header>
 
 
-<section class="movie-section">
+<section class="hero">
 
-<h2>Now Playing</h2>
+<div class="hero-content">
 
-<div class="movie-container">
+<h2>Avengers Endgame</h2>
+<p>Experience the epic Marvel finale</p>
 
-<div class="movie">
-
-<img src="https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg">
-
-<h3>Avengers Endgame</h3>
-
-<div class="rating">⭐⭐⭐⭐⭐</div>
-
-<button onclick="trailer('https://www.youtube.com/embed/TcMBFSGVi1c')">Trailer</button>
-
-<button onclick="buyTicket('Avengers Endgame')">Buy Ticket</button>
-
-</div>
-
-
-<div class="movie">
-
-<img src="https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg">
-
-<h3>The Dark Knight</h3>
-
-<div class="rating">⭐⭐⭐⭐⭐</div>
-
-<button onclick="trailer('https://www.youtube.com/embed/EXeTwQWrcwY')">Trailer</button>
-
-<button onclick="buyTicket('The Dark Knight')">Buy Ticket</button>
-
-</div>
-
-
-<div class="movie">
-
-<img src="https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg">
-
-<h3>Interstellar</h3>
-
-<div class="rating">⭐⭐⭐⭐⭐</div>
-
-<button onclick="trailer('https://www.youtube.com/embed/zSWdZVtXT7E')">Trailer</button>
-
-<button onclick="buyTicket('Interstellar')">Buy Ticket</button>
-
-</div>
+<button onclick="watchTrailer('https://www.youtube.com/embed/TcMBFSGVi1c')">Watch Trailer</button>
 
 </div>
 
 </section>
 
+
+<section class="slider-section">
+
+<h2>Popular Movies</h2>
+
+<div class="slider">
+
+<img src="https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg">
+<img src="https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg">
+<img src="https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg">
+<img src="https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg">
+
+</div>
+
+</section>
+
+
+<section class="movies">
+
+<h2>Now Playing</h2>
+
+<div class="movie-grid" id="movieList">
+
+<div class="movie">
+<img src="https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg">
+<h3>Avengers Endgame</h3>
+<div class="rating">⭐⭐⭐⭐⭐</div>
+<button onclick="watchTrailer('https://www.youtube.com/embed/TcMBFSGVi1c')">Trailer</button>
+<button onclick="buyTicket('Avengers Endgame')">Buy Ticket</button>
+</div>
+
+<div class="movie">
+<img src="https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg">
+<h3>The Dark Knight</h3>
+<div class="rating">⭐⭐⭐⭐⭐</div>
+<button onclick="watchTrailer('https://www.youtube.com/embed/EXeTwQWrcwY')">Trailer</button>
+<button onclick="buyTicket('The Dark Knight')">Buy Ticket</button>
+</div>
+
+<div class="movie">
+<img src="https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg">
+<h3>Interstellar</h3>
+<div class="rating">⭐⭐⭐⭐⭐</div>
+<button onclick="watchTrailer('https://www.youtube.com/embed/zSWdZVtXT7E')">Trailer</button>
+<button onclick="buyTicket('Interstellar')">Buy Ticket</button>
+</div>
+
+</div>
+
+</section>
 
 
 <section class="history">
@@ -87,21 +88,17 @@
 <table>
 
 <thead>
-
 <tr>
-
 <th>Movie</th>
 <th>Seat</th>
 <th>Payment</th>
 <th>Total</th>
-<th>QR</th>
-<th>Receipt</th>
-
+<th>E-Ticket</th>
+<th>Print</th>
 </tr>
-
 </thead>
 
-<tbody id="ticketHistory"></tbody>
+<tbody id="historyTable"></tbody>
 
 </table>
 
@@ -111,7 +108,7 @@
 
 <div class="popup" id="seatPopup">
 
-<div class="popup-box">
+<div class="box">
 
 <h3>Select Seat</h3>
 
@@ -127,22 +124,30 @@
 
 <div class="popup" id="paymentPopup">
 
-<div class="popup-box">
+<div class="box">
 
-<h3>Payment Method</h3>
+<h3>Payment</h3>
 
 <select id="paymentMethod">
 
-<option value="QRIS">QRIS</option>
-<option value="GoPay">GoPay</option>
-<option value="Dana">Dana</option>
-<option value="OVO">OVO</option>
+<option>QRIS</option>
+<option>GoPay</option>
+<option>DANA</option>
+<option>OVO</option>
 
 </select>
 
-<button onclick="pay()">Pay</button>
+<button onclick="payTicket()">Pay</button>
 
 </div>
+
+</div>
+
+
+
+<div class="popup" id="ticketPopup">
+
+<div class="box" id="ticketDesign"></div>
 
 </div>
 
@@ -150,12 +155,10 @@
 
 <div class="popup" id="trailerPopup">
 
-<div class="popup-box">
+<div class="box">
 
 <iframe id="video" width="600" height="350"></iframe>
-
 <br>
-
 <button onclick="closeTrailer()">Close</button>
 
 </div>
