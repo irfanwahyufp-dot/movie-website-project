@@ -1,22 +1,23 @@
 body{
 
-background:#111;
-color:white;
-font-family:Arial;
 margin:0;
+font-family:Arial;
+background:#0f0f0f;
+color:white;
 
 }
 
-header{
+.navbar{
 
-background:black;
-padding:20px;
 display:flex;
 justify-content:space-between;
+align-items:center;
+padding:20px;
+background:black;
 
 }
 
-nav a{
+.navbar a{
 
 color:white;
 margin-left:20px;
@@ -24,55 +25,78 @@ text-decoration:none;
 
 }
 
+.hero{
+
+padding:60px;
+text-align:center;
+background:url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba");
+
+background-size:cover;
+
+}
+
 .movies{
 
 display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:20px;
-padding:30px;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+padding:40px;
 
 }
 
-.movie{
+.movie-card{
 
-background:#1c1c1c;
-padding:15px;
+background:#1a1a1a;
 border-radius:10px;
+overflow:hidden;
+transition:0.3s;
+
+}
+
+.movie-card:hover{
+
+transform:scale(1.05);
+
+}
+
+.movie-card img{
+
+width:100%;
+height:350px;
+object-fit:cover;
+
+}
+
+.movie-info{
+
+padding:15px;
 text-align:center;
 
 }
 
-.movie img{
+.rating{
 
-width:100%;
-border-radius:10px;
+color:gold;
+margin:10px 0;
 
 }
 
-.movie button{
+.movie-info button{
 
 background:gold;
 border:none;
-padding:8px;
-margin-top:6px;
+padding:10px;
 width:100%;
+margin-top:6px;
 border-radius:6px;
+cursor:pointer;
 
 }
 
-.history-title{
+.tickets{
 
+padding:40px;
 text-align:center;
-
-}
-
-.ticket{
-
-background:#1c1c1c;
-padding:15px;
-margin:10px;
-border-radius:10px;
-width:220px;
 
 }
 
@@ -81,6 +105,16 @@ width:220px;
 display:flex;
 flex-wrap:wrap;
 justify-content:center;
+gap:20px;
+
+}
+
+.ticket{
+
+background:#1a1a1a;
+padding:20px;
+border-radius:10px;
+width:220px;
 
 }
 
@@ -100,7 +134,7 @@ align-items:center;
 
 .popup-content{
 
-background:#222;
+background:#1a1a1a;
 padding:20px;
 border-radius:10px;
 
