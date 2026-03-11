@@ -1,16 +1,12 @@
-const API =
-"https://api.tvmaze.com/shows"
-
-const IMG =
-"https://static.tvmaze.com/uploads/images/medium_portrait"
+const API = "https://api.tvmaze.com/shows"
 
 let movies = []
 
 fetch(API)
-.then(res=>res.json())
-.then(data=>{
+.then(res => res.json())
+.then(data => {
 
-movies=data
+movies = data
 
 showMovies(data)
 
@@ -20,20 +16,27 @@ startHero()
 
 function showMovies(data){
 
-const container=
-document.getElementById("movies")
+const container = document.getElementById("movies")
 
-container.innerHTML=""
+container.innerHTML = ""
 
-data.slice(0,30).forEach(movie=>{
+data.slice(0,30).forEach(movie => {
 
-const div=document.createElement("div")
+let image = "https://via.placeholder.com/210x295?text=No+Image"
+
+if(movie.image && movie.image.medium){
+
+image = movie.image.medium
+
+}
+
+const div = document.createElement("div")
 
 div.classList.add("movie")
 
-div.innerHTML=`
+div.innerHTML = `
 
-<img src="${movie.image.medium}">
+<img src="${image}">
 
 <div class="preview">
 
@@ -49,30 +52,39 @@ container.appendChild(div)
 
 }
 
-/* hero slider */
+/* HERO */
 
-let index=0
+let index = 0
 
 function startHero(){
 
 setInterval(()=>{
 
-const movie=movies[index]
+let movie = movies[index]
 
-document.getElementById("hero-img").src=
-movie.image.original
+let image = "https://via.placeholder.com/1280x720?text=Movie"
 
-document.getElementById("hero-title").innerText=
-movie.name
+if(movie.image && movie.image.original){
 
-document.getElementById("hero-desc").innerText=
-movie.summary.replace(/<[^>]+>/g,"").slice(0,120)
+image = movie.image.original
+
+}
+
+document.getElementById("hero-img").src = image
+
+document.getElementById("hero-title").innerText = movie.name
+
+let desc = movie.summary
+? movie.summary.replace(/<[^>]+>/g,"")
+: "No description available"
+
+document.getElementById("hero-desc").innerText = desc.slice(0,120)
 
 index++
 
-if(index>=movies.length){
+if(index >= movies.length){
 
-index=0
+index = 0
 
 }
 
@@ -80,15 +92,15 @@ index=0
 
 }
 
-/* search */
+/* SEARCH */
 
 function searchMovie(){
 
-const text=
-document.getElementById("search").value.toLowerCase()
+const text = document.getElementById("search").value.toLowerCase()
 
-const filtered=
-movies.filter(m=>m.name.toLowerCase().includes(text))
+const filtered = movies.filter(movie =>
+movie.name.toLowerCase().includes(text)
+)
 
 showMovies(filtered)
 
