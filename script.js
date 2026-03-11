@@ -1,171 +1,101 @@
-let selectedMovie=""
-let selectedSeat=""
+const API =
+"https://api.themoviedb.org/3/movie/popular?api_key=demo&language=en-US&page=1"
 
-function searchMovie(){
+const IMG =
+"https://image.tmdb.org/t/p/w500"
 
-let input=document.getElementById("searchMovie").value.toLowerCase()
+const HERO =
+"https://image.tmdb.org/t/p/original"
 
-let movies=document.querySelectorAll(".movie-card")
+let movies = []
 
-movies.forEach(movie=>{
+fetch(API)
+.then(res=>res.json())
+.then(data=>{
 
-let title=movie.innerText.toLowerCase()
+movies = data.results
 
-movie.style.display=title.includes(input)?"block":"none"
+showMovies(movies)
+
+startSlider()
+
+})
+
+function showMovies(data){
+
+const list=document.getElementById("movie-list")
+
+list.innerHTML=""
+
+data.forEach(movie=>{
+
+const div=document.createElement("div")
+
+div.classList.add("movie")
+
+div.innerHTML=`
+
+<img src="${IMG+movie.poster_path}">
+
+<div class="preview">
+
+<h4>${movie.title}</h4>
+
+<p>⭐ ${movie.vote_average}</p>
+
+</div>
+
+`
+
+list.appendChild(div)
 
 })
 
 }
 
 
-function watchTrailer(link){
+/* SEARCH */
 
-document.getElementById("trailerVideo").src=link
-document.getElementById("trailerPopup").style.display="flex"
+function searchMovie(){
 
-}
+const text =
+document.getElementById("search").value.toLowerCase()
 
-function closeTrailer(){
+const filtered =
+movies.filter(m=>m.title.toLowerCase().includes(text))
 
-document.getElementById("trailerPopup").style.display="none"
-document.getElementById("trailerVideo").src=""
-
-}
-
-
-function buyTicket(movie){
-
-selectedMovie=movie
-
-document.getElementById("seatPopup").style.display="flex"
-
-generateSeats()
+showMovies(filtered)
 
 }
 
 
-function generateSeats(){
+/* HERO SLIDER */
 
-let seatContainer=document.getElementById("seats")
+let slide=0
 
-seatContainer.innerHTML=""
+function startSlider(){
 
-for(let i=1;i<=20;i++){
+setInterval(()=>{
 
-let seat=document.createElement("div")
+const movie=movies[slide]
 
-seat.className="seat"
+document.getElementById("hero-img").src=
+HERO+movie.backdrop_path
 
-seat.innerText="A"+i
+document.getElementById("hero-title").innerText=
+movie.title
 
-seat.onclick=function(){
+document.getElementById("hero-desc").innerText=
+movie.overview.substring(0,120)+"..."
 
-document.querySelectorAll(".seat").forEach(s=>s.classList.remove("selected"))
+slide++
 
-seat.classList.add("selected")
+if(slide>=movies.length){
 
-selectedSeat=seat.innerText
-
-}
-
-seatContainer.appendChild(seat)
-
-}
+slide=0
 
 }
 
-
-function nextPayment(){
-
-if(selectedSeat==""){
-
-alert("Select seat first")
-return
-
-}
-
-document.getElementById("seatPopup").style.display="none"
-
-document.getElementById("paymentPopup").style.display="flex"
-
-}
-
-
-function payTicket(){
-
-let payment=document.getElementById("paymentMethod").value
-
-let time=document.getElementById("showtime").value
-
-document.getElementById("paymentPopup").style.display="none"
-
-createTicket(selectedMovie,selectedSeat,payment,time)
-
-addHistory(selectedMovie,selectedSeat,payment,time)
-
-}
-
-
-function createTicket(movie,seat,payment,time){
-
-let qr=`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${movie}-${seat}`
-
-document.getElementById("ticketDesign").innerHTML=`
-
-<button class="close-btn" onclick="closeTicket()">✖</button>
-
-<h2>XXI CINEMA</h2>
-
-<p>Movie : ${movie}</p>
-<p>Seat : ${seat}</p>
-<p>Time : ${time}</p>
-<p>Payment : ${payment}</p>
-<p>Total : Rp 35000</p>
-
-<img src="${qr}">
-
-<br><br>
-
-<button onclick="window.print()">Print Ticket</button>
-
-`
-
-document.getElementById("ticketPopup").style.display="flex"
-
-}
-
-
-function closeTicket(){
-
-document.getElementById("ticketPopup").style.display="none"
-
-}
-
-
-function addHistory(movie,seat,payment,time){
-
-let table=document.getElementById("historyTable")
-
-let qr=`https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${movie}-${seat}`
-
-let row=`
-
-<tr>
-
-<td>${movie}</td>
-<td>${seat}</td>
-<td>${time}</td>
-<td>${payment}</td>
-<td>Rp 35000</td>
-
-<td><img src="${qr}"></td>
-
-<td><button onclick="window.print()">Print</button></td>
-
-</tr>
-
-`
-
-table.innerHTML+=row
+},3000)
 
 }
