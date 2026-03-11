@@ -1,9 +1,9 @@
 body{
 
-margin:0;
 font-family:Arial;
 background:#0b0b0b;
 color:white;
+margin:0;
 
 }
 
@@ -20,8 +20,8 @@ background:black;
 header input{
 
 padding:8px;
-border:none;
 border-radius:5px;
+border:none;
 
 }
 
@@ -33,7 +33,7 @@ background:linear-gradient(to right,#000,#222);
 
 }
 
-.title{
+.section-title{
 
 margin-left:30px;
 margin-top:40px;
@@ -51,11 +51,11 @@ flex-wrap:wrap;
 
 .movie-card{
 
-background:#1c1c1c;
+background:#1b1b1b;
 padding:15px;
 border-radius:10px;
-width:250px;
 text-align:center;
+width:250px;
 transition:0.3s;
 
 }
@@ -79,9 +79,9 @@ background:#f5c518;
 border:none;
 padding:10px;
 margin-top:10px;
-width:100%;
 cursor:pointer;
 border-radius:5px;
+width:100%;
 
 }
 
@@ -121,16 +121,7 @@ background:#1c1c1c;
 padding:30px;
 border-radius:10px;
 text-align:center;
-
-}
-
-.ticket-box{
-
 position:relative;
-background:#1c1c1c;
-padding:30px;
-border-radius:10px;
-text-align:center;
 
 }
 
@@ -142,9 +133,6 @@ right:10px;
 background:red;
 color:white;
 border:none;
-width:30px;
-height:30px;
-border-radius:50%;
 cursor:pointer;
 
 }
@@ -162,12 +150,5 @@ cursor:pointer;
 .seat.selected{
 
 background:green;
-
-}
-
-.ticket{
-
-border:2px dashed yellow;
-padding:20px;
 
 }
