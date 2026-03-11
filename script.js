@@ -1,27 +1,29 @@
-const API = "https://api.tvmaze.com/shows"
+const movies = [
 
-let movies = []
+{
+title:"Stranger Things",
+poster:"https://image.tmdb.org/t/p/w500/49WJfeN0moxb9IPfGn8AIqMGskD.jpg",
+trailer:"https://www.youtube.com/embed/b9EkMc79ZSU?autoplay=1&mute=1"
+},
 
-fetch(API)
-.then(res=>res.json())
-.then(data=>{
+{
+title:"Wednesday",
+poster:"https://image.tmdb.org/t/p/w500/9PFonBhy4cQy7Jz20NpMygczOkv.jpg",
+trailer:"https://www.youtube.com/embed/Di310WS8zLk?autoplay=1&mute=1"
+},
 
-movies = data
+{
+title:"Money Heist",
+poster:"https://image.tmdb.org/t/p/w500/reEMJA1uzscCbkpeRJeTT2bjqUp.jpg",
+trailer:"https://www.youtube.com/embed/_InqQJRqGW4?autoplay=1&mute=1"
+}
 
-loadMovies()
+]
 
-startHero()
-
-})
-
-
-function loadMovies(){
 
 const container = document.getElementById("movies")
 
-movies.slice(0,25).forEach(movie=>{
-
-if(!movie.image) return
+movies.forEach(movie=>{
 
 const div = document.createElement("div")
 
@@ -29,51 +31,22 @@ div.classList.add("movie")
 
 div.innerHTML = `
 
-<img src="${movie.image.medium}">
+<img src="${movie.poster}">
+
+<div class="preview">
+
+<iframe
+src="${movie.trailer}"
+frameborder="0"
+allow="autoplay"
+></iframe>
+
+<h4>${movie.title}</h4>
+
+</div>
 
 `
 
 container.appendChild(div)
 
 })
-
-}
-
-
-
-let index = 0
-
-function startHero(){
-
-setInterval(()=>{
-
-let movie = movies[index]
-
-if(movie.image){
-
-document.getElementById("hero-img").src =
-movie.image.original
-
-document.getElementById("hero-title").innerText =
-movie.name
-
-let desc = movie.summary
-? movie.summary.replace(/<[^>]+>/g,"")
-: ""
-
-document.getElementById("hero-desc").innerText =
-desc.slice(0,140)
-
-}
-
-index++
-
-if(index >= movies.length){
-
-index = 0
-
-}
-
-},5000)
-
-}
