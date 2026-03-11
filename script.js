@@ -3,27 +3,23 @@ const API = "https://api.tvmaze.com/shows"
 let movies = []
 
 fetch(API)
-
-.then(res => res.json())
-
-.then(data => {
+.then(res=>res.json())
+.then(data=>{
 
 movies = data
 
-showMovies()
+loadMovies()
 
 startHero()
 
 })
 
 
-function showMovies(){
+function loadMovies(){
 
 const container = document.getElementById("movies")
 
-container.innerHTML = ""
-
-movies.slice(0,40).forEach(movie => {
+movies.slice(0,25).forEach(movie=>{
 
 if(!movie.image) return
 
@@ -44,8 +40,6 @@ container.appendChild(div)
 }
 
 
-
-/* HERO SLIDER */
 
 let index = 0
 
@@ -80,6 +74,6 @@ index = 0
 
 }
 
-},4000)
+},5000)
 
 }
