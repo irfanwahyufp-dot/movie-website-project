@@ -1,107 +1,139 @@
-// film yang dipilih
-let selectedMovie = "";
+let selectedMovie=""
+let selectedSeat=""
 
-// buka popup saat klik Buy Ticket
+function watchTrailer(link){
+
+document.getElementById("trailerPopup").style.display="flex"
+document.getElementById("trailerFrame").src=link
+
+}
+
+function closeTrailer(){
+
+document.getElementById("trailerPopup").style.display="none"
+document.getElementById("trailerFrame").src=""
+
+}
+
 function buyTicket(movie){
 
-selectedMovie = movie;
+selectedMovie=movie
 
-document.getElementById("paymentPopup").style.display = "flex";
+document.getElementById("seatPopup").style.display="flex"
 
-}
-
-// tutup popup
-function closePopup(){
-
-document.getElementById("paymentPopup").style.display = "none";
+createSeats()
 
 }
 
-// ganti metode pembayaran
+function createSeats(){
+
+let seats=document.getElementById("seats")
+
+seats.innerHTML=""
+
+for(let i=1;i<=20;i++){
+
+seats.innerHTML+=`<div class="seat" onclick="selectSeat(${i})">${i}</div>`
+
+}
+
+}
+
+function selectSeat(num){
+
+selectedSeat=num
+
+document.querySelectorAll(".seat").forEach(s=>s.classList.remove("selected"))
+
+event.target.classList.add("selected")
+
+}
+
+function confirmSeat(){
+
+document.getElementById("seatPopup").style.display="none"
+
+document.getElementById("paymentPopup").style.display="flex"
+
+}
+
 function changePayment(){
 
-let method = document.getElementById("paymentMethod").value;
+let method=document.getElementById("paymentMethod").value
 
-let qris = document.getElementById("qrisBox");
-let ewallet = document.getElementById("ewalletBox");
+document.getElementById("qrisBox").style.display=
+method==="qris"?"block":"none"
 
-if(method === "qris"){
+document.getElementById("ewalletBox").style.display=
+method==="ewallet"?"block":"none"
 
-qris.style.display = "block";
-ewallet.style.display = "none";
+if(method==="qris"){
 
-}
-
-else if(method === "ewallet"){
-
-ewallet.style.display = "block";
-qris.style.display = "none";
+document.getElementById("qrTicket").src=
+"https://api.qrserver.com/v1/create-qr-code/?size=200x200&data="+selectedMovie
 
 }
 
 }
 
-// proses pembayaran
 function payNow(){
 
-let method = document.getElementById("paymentMethod").value;
+let method=document.getElementById("paymentMethod").value
 
-let payment = "QRIS";
+let payment="QRIS"
 
-if(method === "ewallet"){
+if(method==="ewallet"){
 
-payment = document.getElementById("wallet").value;
-
-}
-
-// data tiket
-let ticket = {
-
-movie : selectedMovie,
-time : "12:30",
-seat : Math.floor(Math.random()*20)+1,
-total : 35000,
-payment : payment
-
-};
-
-// ambil data lama
-let tickets = JSON.parse(localStorage.getItem("tickets")) || [];
-
-// tambah tiket baru
-tickets.push(ticket);
-
-// simpan ke localStorage
-localStorage.setItem("tickets", JSON.stringify(tickets));
-
-// tutup popup
-closePopup();
-
-// tampilkan tiket
-showTickets();
+payment=document.getElementById("wallet").value
 
 }
 
-// tampilkan riwayat tiket
+let ticket={
+
+movie:selectedMovie,
+seat:selectedSeat,
+payment:payment,
+total:35000
+
+}
+
+let tickets=JSON.parse(localStorage.getItem("tickets"))||[]
+
+tickets.push(ticket)
+
+localStorage.setItem("tickets",JSON.stringify(tickets))
+
+document.getElementById("paymentPopup").style.display="none"
+
+showTickets()
+
+}
+
 function showTickets(){
 
-let tickets = JSON.parse(localStorage.getItem("tickets")) || [];
+let tickets=JSON.parse(localStorage.getItem("tickets"))||[]
 
-let container = document.getElementById("ticketHistory");
+let box=document.getElementById("ticketHistory")
 
-container.innerHTML = "";
+box.innerHTML=""
 
 tickets.forEach((t,i)=>{
 
-container.innerHTML += `
+box.innerHTML+=`
 
 <div class="ticket">
 
-<p><b>${t.movie}</b></p>
-<p>Time : ${t.time}</p>
+<b>${t.movie}</b>
+
 <p>Seat : ${t.seat}</p>
+
 <p>Total : Rp ${t.total}</p>
+
 <p>Payment : ${t.payment}</p>
+
+<img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${t.movie}-${t.seat}">
+
+<br><br>
 
 <button onclick="printTicket(${i})">
 Cetak Struk
@@ -109,46 +141,42 @@ Cetak Struk
 
 </div>
 
-`;
+`
 
-});
+})
 
 }
 
-// cetak struk
-function printTicket(index){
+function printTicket(i){
 
-let tickets = JSON.parse(localStorage.getItem("tickets"));
+let tickets=JSON.parse(localStorage.getItem("tickets"))
 
-let t = tickets[index];
+let t=tickets[i]
 
-let receipt = `
+let w=window.open("","","width=400,height=600")
+
+w.document.write(`
 
 <h2>XXI Cinema</h2>
 
 <hr>
 
 <p>Movie : ${t.movie}</p>
-<p>Time : ${t.time}</p>
+
 <p>Seat : ${t.seat}</p>
+
 <p>Payment : ${t.payment}</p>
+
 <p>Total : Rp ${t.total}</p>
 
 <hr>
 
-<p>Terima kasih telah membeli tiket</p>
+Enjoy The Movie
 
-`;
+`)
 
-let win = window.open("", "", "width=400,height=600");
-
-win.document.write(receipt);
-
-win.document.close();
-
-win.print();
+w.print()
 
 }
 
-// tampilkan tiket saat halaman dibuka
-window.onload = showTickets;
+window.onload=showTickets
