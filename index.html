@@ -12,7 +12,11 @@
 
 </head>
 
+
 <body>
+
+
+<!-- SIDEBAR -->
 
 <div class="sidebar">
 
@@ -21,16 +25,19 @@
 <img src="images/profile.jpg">
 
 <div>
+
 <h3>Fann</h3>
 <p>Switch Profiles</p>
+
 </div>
 
 </div>
+
 
 <ul>
 
 <li>🏠 Home</li>
-<li>🔎 Search</li>
+<li>🔍 Search</li>
 <li>🔥 New & Popular</li>
 <li>🎬 Movies</li>
 <li>📺 TV Shows</li>
@@ -41,44 +48,51 @@
 </div>
 
 
+
+<!-- MAIN -->
+
 <div class="main">
+
+
+<!-- HERO -->
 
 <div class="hero">
 
 <img id="hero-img">
 
-<div class="hero-info">
+<div class="hero-content">
 
 <h1 id="hero-title"></h1>
 
 <p id="hero-desc"></p>
 
+<div class="buttons">
+
 <button class="play">▶ Play</button>
+
 <button class="info">More Info</button>
 
 </div>
 
 </div>
 
-
-<div class="search-box">
-
-<input 
-type="text"
-placeholder="Search movies..."
-id="search"
-onkeyup="searchMovie()"
-/>
-
 </div>
 
 
-<h2>Trending</h2>
+
+<!-- MOVIE ROW -->
+
+<h2 class="section-title">Trending Now</h2>
+
 <div class="movie-row" id="movies"></div>
 
+
+
 </div>
+
 
 <script src="script.js"></script>
 
 </body>
+
 </html>
