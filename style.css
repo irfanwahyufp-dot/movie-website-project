@@ -1,59 +1,106 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins;
+}
+
 body{
 background:black;
 color:white;
-font-family:Poppins;
-margin:0;
 }
+
+/* NAVBAR */
 
 .navbar{
 display:flex;
 align-items:center;
-padding:20px;
+padding:20px 60px;
 background:black;
 position:fixed;
 width:100%;
+top:0;
+z-index:10;
 }
 
 .logo{
 color:red;
-font-size:24px;
+font-size:28px;
+font-weight:bold;
 margin-right:40px;
 }
 
-.nav-menu{
+.menu{
 display:flex;
-gap:20px;
 list-style:none;
+gap:25px;
 }
 
+.menu li{
+cursor:pointer;
+}
+
+/* HERO BANNER */
+
 .banner{
-height:500px;
+height:600px;
 background-image:url("stangerthings.jpg");
 background-size:cover;
+background-position:center;
 display:flex;
 align-items:center;
 padding-left:60px;
-margin-top:70px;
+margin-top:80px;
+}
+
+.banner-content{
+max-width:500px;
 }
 
 .banner-content h1{
-font-size:50px;
+font-size:60px;
+margin-bottom:20px;
 }
 
-.movie-section{
-padding:30px;
+.banner-content p{
+margin-bottom:20px;
+}
+
+.buttons button{
+padding:12px 25px;
+margin-right:10px;
+border:none;
+cursor:pointer;
+font-weight:bold;
+}
+
+.play{
+background:white;
+}
+
+.list{
+background:#444;
+color:white;
+}
+
+/* MOVIE ROW */
+
+.movies{
+padding:40px 60px;
 }
 
 .movie-row{
 display:flex;
-gap:20px;
+gap:15px;
 margin-top:20px;
+overflow-x:auto;
 }
 
 .movie-row img{
 width:200px;
 border-radius:5px;
 transition:0.3s;
+cursor:pointer;
 }
 
 .movie-row img:hover{
