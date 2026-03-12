@@ -1,62 +1,104 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Movie Website</title>
-<link rel="stylesheet" href="style.css">
-</head>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
 
-<body>
+body{
+background:black;
+color:white;
+}
 
-<header>
-    <div class="logo">NETFLIX</div>
+/* HEADER */
 
-    <nav>
-        <a href="#">TV Shows</a>
-        <a href="#">Movies</a>
-        <a href="#">Recently Added</a>
-        <a href="#">My List</a>
-    </nav>
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 60px;
+}
 
-    <img src="profile.jpg" class="profile">
-</header>
+.logo{
+color:red;
+font-size:28px;
+font-weight:bold;
+}
 
+nav a{
+color:white;
+margin-right:20px;
+text-decoration:none;
+font-size:16px;
+}
 
-<section class="banner">
+nav a:hover{
+color:red;
+}
 
-<h1>Stranger Things</h1>
+.profile{
+width:40px;
+border-radius:4px;
+}
 
-<p>
-When a young boy vanishes, a small town uncovers a mystery
-involving secret experiments, terrifying supernatural forces
-and a strange little girl.
-</p>
+/* BANNER */
 
-<div class="buttons">
-<button class="play">▶ Play</button>
-<button class="list">+ My List</button>
-</div>
+.banner{
+padding:120px 60px;
+max-width:600px;
+}
 
-</section>
+.banner h1{
+font-size:64px;
+margin-bottom:20px;
+}
 
+.banner p{
+color:#ddd;
+line-height:1.6;
+margin-bottom:20px;
+}
 
-<section class="movies">
+.buttons button{
+padding:12px 22px;
+border:none;
+font-weight:bold;
+cursor:pointer;
+margin-right:10px;
+}
 
-<h2>Popular on Netflix</h2>
+.play{
+background:white;
+color:black;
+}
 
-<div class="movie-row">
+.list{
+background:#444;
+color:white;
+}
 
-<img src="moneyheist.jpg">
-<img src="wednesday.jpg">
-<img src="witcher.jpg">
-<img src="strangerthings.jpg">
+/* MOVIE SECTION */
 
-</div>
+.movies{
+padding:40px 60px;
+}
 
-</section>
+.movies h2{
+margin-bottom:20px;
+}
 
-<script src="script.js"></script>
+.movie-row{
+display:flex;
+gap:20px;
+}
 
-</body>
-</html>
+.movie-row img{
+width:220px;
+border-radius:6px;
+transition:0.3s;
+cursor:pointer;
+}
+
+.movie-row img:hover{
+transform:scale(1.1);
+}
