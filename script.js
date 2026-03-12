@@ -1,1 +1,1 @@
-console.log("Movie Website Loaded");
+console.log("FannFlix loaded");
